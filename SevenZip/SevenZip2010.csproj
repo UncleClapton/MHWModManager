@@ -13,7 +13,8 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SignAssembly>false</SignAssembly>
-    <AssemblyOriginatorKeyFile>mykeyfile.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>
+    </AssemblyOriginatorKeyFile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -120,8 +121,6 @@
     <Compile Include="StreamWrappers.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
-    <None Include="mykeyfile.pfx" />
     <None Include="packages.config" />
     <None Include="sfx\7zS.sfx" />
     <None Include="sfx\7zxSD_All.sfx" />
@@ -159,7 +158,6 @@
     <EmbeddedResource Include="arch\Test.txt.gz" />
     <EmbeddedResource Include="arch\Test.txt.xz" />
     <EmbeddedResource Include="arch\Test.zip" />
-    <None Include="SevenZip.snk" />
     <None Include="sfx\7z.sfx" />
     <None Include="sfx\7zCon.sfx" />
   </ItemGroup>
