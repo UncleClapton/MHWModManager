@@ -21,7 +21,7 @@ Releases can be found [on the nexus mods website.][mmnexus-releases]
 Before starting **any** work, please *please* ***please*** inform with the maintainers by creating, or replying to, an appropriate issue thread for the feature/bug you're going to be working on.
 This is to prevent stepping on other's toes, and so **you** don't waste any time on a bug thats already been fixed! :)
 
-1. Fork this repository so you have a local copy to work off of.
+1. Fork this repository so you have a local copy to work off of
 2. Create a working branch from `master`
 3. Develop your feature/bugfix/whatever
 4. Commit your changes
