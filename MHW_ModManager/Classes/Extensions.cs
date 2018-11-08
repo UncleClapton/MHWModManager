@@ -39,5 +39,10 @@ public static class Extensions {
         return final;
     }
 
+
+    public static string SubstringIndexOf(this string str, string searchStr, int offset = 0) {
+        return str.Substring(str.IndexOf(searchStr) + offset);
+    }
+
 }
 
