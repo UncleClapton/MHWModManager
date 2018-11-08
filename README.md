@@ -25,7 +25,7 @@ This is to prevent stepping on other's toes, and so **you** don't waste any time
 2. Create a working branch from `master`
 3. Develop your feature/bugfix/whatever
 4. Commit your changes
-5. rebase to upstream `master` if neccessary
+5. Rebase to upstream `master` if neccessary
 6. Create a PR on the main repository
 
 Don't know what any of this means? New to open source?  Digital Ocean has you covered!
