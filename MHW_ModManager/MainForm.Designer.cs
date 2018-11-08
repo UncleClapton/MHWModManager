@@ -67,7 +67,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tip = new System.Windows.Forms.ToolTip(this.components);
             this.topPanel = new DraggablePanel();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.linkNewUpdate = new System.Windows.Forms.LinkLabel();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
@@ -640,7 +640,7 @@
             // 
             this.topPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(60)))));
             this.topPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.topPanel.Controls.Add(this.linkLabel1);
+            this.topPanel.Controls.Add(this.linkNewUpdate);
             this.topPanel.Controls.Add(this.button2);
             this.topPanel.Controls.Add(this.button1);
             this.topPanel.Controls.Add(this.buttonClose);
@@ -652,20 +652,24 @@
             this.topPanel.Size = new System.Drawing.Size(1470, 30);
             this.topPanel.TabIndex = 0;
             // 
-            // linkLabel1
+            // linkNewUpdate
             // 
-            this.linkLabel1.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
-            this.linkLabel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(120)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.linkLabel1.Location = new System.Drawing.Point(246, 0);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(138, 28);
-            this.linkLabel1.TabIndex = 4;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "Check For Updates";
-            this.linkLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkNewUpdate.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.linkNewUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.linkNewUpdate.AutoSize = true;
+            this.linkNewUpdate.DisabledLinkColor = System.Drawing.Color.PaleTurquoise;
+            this.linkNewUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkNewUpdate.LinkColor = System.Drawing.Color.SandyBrown;
+            this.linkNewUpdate.Location = new System.Drawing.Point(252, 5);
+            this.linkNewUpdate.Margin = new System.Windows.Forms.Padding(5);
+            this.linkNewUpdate.Name = "linkNewUpdate";
+            this.linkNewUpdate.Size = new System.Drawing.Size(153, 18);
+            this.linkNewUpdate.TabIndex = 4;
+            this.linkNewUpdate.TabStop = true;
+            this.linkNewUpdate.Text = "New Update Available!";
+            this.linkNewUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkNewUpdate.Visible = false;
+            this.linkNewUpdate.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
             // 
             // button2
             // 
@@ -816,7 +820,7 @@
     private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
     private System.Windows.Forms.Button buttonDeleteNotFound;
     private System.Windows.Forms.ToolStripMenuItem reloadArchiveToolStripMenuItem;
-    private System.Windows.Forms.LinkLabel linkLabel1;
+    public System.Windows.Forms.LinkLabel linkNewUpdate;
 }
 
 

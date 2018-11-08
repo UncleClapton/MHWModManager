@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 public partial class MainForm : Form {
 
 
-    public const float programVersion = 1.250f;
+    public const float programVersion = 1.3f;
 
     public static MainForm instance;
     public ModsData modsData;
@@ -39,6 +39,8 @@ public partial class MainForm : Form {
         olvColumnSize.AspectToStringConverter = (object sizeFloat) => ModInfo.SizeSuffixer((float)sizeFloat);
 
         labelTitle.Text = "MHW Mod Managaer - By: BoltMan  V" + programVersion;
+
+        NexusUpdateChecker.CheckForNewVersion();
     }
 
     void LoadData() {
@@ -306,6 +308,168 @@ public partial class MainForm : Form {
         Serializer.SaveObj(instance.modsData, Serializer.GetDataFilePath());
     }
 
+
+    private void olvModList_DragEnter(object sender, DragEventArgs e) {
+        e.Effect = DragDropEffects.Move;
+    }
+
+    private void olvModList_DragDrop(object sender, DragEventArgs e) {
+        string modCacheFolder = Serializer.GetModsCacheFolder();
+        Directory.CreateDirectory(modCacheFolder);
+
+        var files = e.Data.GetData(DataFormats.FileDrop) as string[];
+
+        if (files.Length == 0)
+            return;
+
+        string[] modFiles = Directory.GetFiles(modCacheFolder, "*", SearchOption.AllDirectories);
+        string lastAdded = null;
+
+
+        foreach (string file in files) {
+            bool isDir = Directory.Exists(file);
+            string fileName = Path.GetFileName(file);
+
+            if (isDir) {
+                FileSystem.MoveDirectory(file, modCacheFolder + fileName, UIOption.OnlyErrorDialogs, UICancelOption.DoNothing);
+            } else {
+                if (!modFiles.Contains(file) && !File.Exists(modCacheFolder + fileName) && File.Exists(file)) {
+                    File.Move(file, modCacheFolder + fileName);
+                }
+                lastAdded = modCacheFolder + fileName;
+            }
+
+        }
+
+        ModCache.RescanModCacheFolder();
+
+        if (lastAdded != null) {
+            olvModList.SelectedObject = modsData.modInfos.FindLast(x => x.modPath.ToLower() == lastAdded.ToLower());
+            olvModList.EnsureModelVisible(olvModList.SelectedObject);
+        }
+
+
+    }
+
+    private void deleteModArchiveToolStripMenuItem_Click(object sender, EventArgs e) {
+        uninstallAllFilesToolStripMenuItem_Click(sender, e);
+
+        deleteModArchiveWithoutUninstallingToolStripMenuItem_Click(sender, e);
+    }
+
+    private void contextList_Opening(object sender, CancelEventArgs e) {
+        ModInfo selMod = GetSelectedMod();
+        if (!selMod) {
+            e.Cancel = true;
+            return;
+        }
+
+        openLocationToolStripMenuItem.Enabled = File.Exists(selMod.modPath);
+
+
+        installAllFilesToolStripMenuItem.Enabled = !selMod.installed && selMod.archiveExists;
+    }
+
+    private void deleteModArchiveWithoutUninstallingToolStripMenuItem_Click(object sender, EventArgs e) {
+        ModInfo selMod = GetSelectedMod();
+        if (!selMod) return;
+
+        if (File.Exists(selMod.modPath)) {
+            RecycleManager.DeleteNoWarn(selMod.modPath);
+        }
+
+        modsData.modInfos.Remove(selMod);
+
+        RefreshListView();
+    }
+
+    private void uninstallAllFilesToolStripMenuItem_Click(object sender, EventArgs e) {
+        ModInfo selMod = GetSelectedMod();
+        if (!selMod) return;
+
+        ArchiveManager.UninstallSelected(selMod);
+    }
+
+    private void installAllFilesToolStripMenuItem_Click(object sender, EventArgs e) {
+        ModInfo selMod = GetSelectedMod();
+        if (!selMod) return;
+
+        buttonCheckAll_Click(null, null);
+        ArchiveManager.InstallSelected(selMod);
+    }
+
+    private void olvModList_AfterSorting(object sender, BrightIdeasSoftware.AfterSortingEventArgs e) {
+        var obj = olvModList.SelectedObject;
+        if (obj != null)
+            olvModList.EnsureModelVisible(obj);
+    }
+
+    private void buttonUninstallSelected_Click(object sender, EventArgs e) {
+        ModInfo selMod = GetSelectedMod();
+        if (!selMod) return;
+
+        ArchiveManager.UninstallSelected(selMod);
+    }
+
+    private void buttonInstallSelected_Click(object sender, EventArgs e) {
+        ModInfo selMod = GetSelectedMod();
+        if (!selMod) return;
+
+        ArchiveManager.InstallSelected(selMod);
+    }
+
+    private void buttonUncheckAll_Click(object sender, EventArgs e) {
+        foreach (TreeNode node in treeViewFiles.Nodes) {
+            CheckAll(node, false);
+        }
+    }
+    private void buttonCheckAll_Click(object sender, EventArgs e) {
+        foreach (TreeNode node in treeViewFiles.Nodes) {
+            CheckAll(node, true);
+        }
+    }
+
+    void CheckAll(TreeNode pNode, bool state) {
+        pNode.Checked = state;
+        foreach (TreeNode node in pNode.Nodes) {
+            CheckAll(node, state);
+        }
+    }
+
+    private void openLocationToolStripMenuItem_Click(object sender, EventArgs e) {
+        ModInfo selMod = GetSelectedMod();
+        if (!selMod) return;
+
+        if (File.Exists(selMod.modPath)) {
+            string argument = "/select, \"" + selMod.modPath + "\"";
+
+            System.Diagnostics.Process.Start("explorer.exe", argument);
+        }
+    }
+
+    private void buttonDeleteNotFound_Click(object sender, EventArgs e) {
+        modsData.modInfos.RemoveAll(mod => !File.Exists(mod.modPath));
+
+        RefreshListView();
+    }
+
+    private void reloadArchiveToolStripMenuItem_Click(object sender, EventArgs e) {
+        ModInfo selMod = GetSelectedMod();
+        if (!selMod) return;
+
+        ModCache.ReCheckMods(new ModInfo[] { selMod });
+
+        RefreshListView();
+        RefreshTreeView();
+    }
+
+    private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
+        System.Diagnostics.Process.Start("https://www.nexusmods.com/monsterhunterworld/mods/372?tab=files");
+    }
+
+
+
+
     //window managemnet
     private void buttonClose_Click(object sender, EventArgs e) {
         Close();
@@ -424,161 +588,5 @@ public partial class MainForm : Form {
 
 
 
-    private void olvModList_DragEnter(object sender, DragEventArgs e) {
-        e.Effect = DragDropEffects.Move;
-    }
 
-    private void olvModList_DragDrop(object sender, DragEventArgs e) {
-        string modCacheFolder = Serializer.GetModsCacheFolder();
-        Directory.CreateDirectory(modCacheFolder);
-
-        var files = e.Data.GetData(DataFormats.FileDrop) as string[];
-
-        if (files.Length == 0)
-            return;
-
-        string[] modFiles = Directory.GetFiles(modCacheFolder, "*", SearchOption.AllDirectories);
-        string lastAdded = null;
-
-
-        foreach (string file in files) {
-            bool isDir = Directory.Exists(file);
-            string fileName = Path.GetFileName(file);
-
-            if (isDir) {
-                FileSystem.MoveDirectory(file, modCacheFolder + fileName, UIOption.OnlyErrorDialogs, UICancelOption.DoNothing);
-            } else {
-                if (!modFiles.Contains(file) && !File.Exists(modCacheFolder + fileName) && File.Exists(file)) {
-                    File.Move(file, modCacheFolder + fileName);
-                }
-                lastAdded = modCacheFolder + fileName;
-            }
-
-        }
-
-        ModCache.RescanModCacheFolder();
-
-        if (lastAdded != null) {
-            olvModList.SelectedObject = modsData.modInfos.FindLast(x => x.modPath.ToLower() == lastAdded.ToLower());
-            olvModList.EnsureModelVisible(olvModList.SelectedObject);
-        }
-
-
-    }
-
-    private void deleteModArchiveToolStripMenuItem_Click(object sender, EventArgs e) {
-        uninstallAllFilesToolStripMenuItem_Click(sender, e);
-
-        deleteModArchiveWithoutUninstallingToolStripMenuItem_Click(sender, e);
-    }
-
-    private void contextList_Opening(object sender, CancelEventArgs e) {
-        ModInfo selMod = GetSelectedMod();
-        if (!selMod) {
-            e.Cancel = true;
-            return;
-        }
-
-        openLocationToolStripMenuItem.Enabled = File.Exists(selMod.modPath);
-
-
-        installAllFilesToolStripMenuItem.Enabled = !selMod.installed && selMod.archiveExists;
-    }
-
-    private void deleteModArchiveWithoutUninstallingToolStripMenuItem_Click(object sender, EventArgs e) {
-        ModInfo selMod = GetSelectedMod();
-        if (!selMod) return;
-
-        if (File.Exists(selMod.modPath)) {
-            RecycleManager.DeleteNoWarn(selMod.modPath);
-        }
-
-        modsData.modInfos.Remove(selMod);
-
-        RefreshListView();
-    }
-
-    private void uninstallAllFilesToolStripMenuItem_Click(object sender, EventArgs e) {
-        ModInfo selMod = GetSelectedMod();
-        if (!selMod) return;
-
-        ArchiveManager.UninstallSelected(selMod);
-    }
-
-    private void installAllFilesToolStripMenuItem_Click(object sender, EventArgs e) {
-        ModInfo selMod = GetSelectedMod();
-        if (!selMod) return;
-
-        buttonCheckAll_Click(null, null);
-        ArchiveManager.InstallSelected(selMod);
-    }
-
-    private void olvModList_AfterSorting(object sender, BrightIdeasSoftware.AfterSortingEventArgs e) {
-        var obj = olvModList.SelectedObject;
-        if(obj != null)
-            olvModList.EnsureModelVisible(obj);
-    }
-
-    private void buttonUninstallSelected_Click(object sender, EventArgs e) {
-        ModInfo selMod = GetSelectedMod();
-        if (!selMod) return;
-
-        ArchiveManager.UninstallSelected(selMod);
-    }
-
-    private void buttonInstallSelected_Click(object sender, EventArgs e) {
-        ModInfo selMod = GetSelectedMod();
-        if (!selMod) return;
-
-        ArchiveManager.InstallSelected(selMod);
-    }
-
-    private void buttonUncheckAll_Click(object sender, EventArgs e) {
-        foreach(TreeNode node in treeViewFiles.Nodes) {
-            CheckAll(node, false);
-        }
-    }
-    private void buttonCheckAll_Click(object sender, EventArgs e) {
-        foreach (TreeNode node in treeViewFiles.Nodes) {
-            CheckAll(node, true);
-        }
-    }
-
-    void CheckAll(TreeNode pNode, bool state) {
-        pNode.Checked = state;
-        foreach (TreeNode node in pNode.Nodes) {
-            CheckAll(node, state);
-        }
-    }
-
-    private void openLocationToolStripMenuItem_Click(object sender, EventArgs e) {
-        ModInfo selMod = GetSelectedMod();
-        if (!selMod) return;
-
-        if (File.Exists(selMod.modPath)) {
-            string argument = "/select, \"" + selMod.modPath + "\"";
-
-            System.Diagnostics.Process.Start("explorer.exe", argument);
-        }
-    }
-
-    private void buttonDeleteNotFound_Click(object sender, EventArgs e) {
-        modsData.modInfos.RemoveAll(mod => !File.Exists(mod.modPath));
-
-        RefreshListView();
-    }
-
-    private void reloadArchiveToolStripMenuItem_Click(object sender, EventArgs e) {
-        ModInfo selMod = GetSelectedMod();
-        if (!selMod) return;
-
-        ModCache.ReCheckMods(new ModInfo[] { selMod });
-
-        RefreshListView();
-        RefreshTreeView();
-    }
-
-    private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e) {
-        System.Diagnostics.Process.Start("https://www.nexusmods.com/monsterhunterworld/mods/372?tab=files");
-    }
 }
