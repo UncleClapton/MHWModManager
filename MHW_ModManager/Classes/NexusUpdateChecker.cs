@@ -31,6 +31,8 @@ public class NexusUpdateChecker {
             if(versionNum <= MainForm.instance.modsData.version) {
                 MainForm.instance.linkNewUpdate.Text = "You Have the Latest Version";
                 MainForm.instance.linkNewUpdate.LinkColor = System.Drawing.Color.LawnGreen;
+            } else {
+                MainForm.instance.linkNewUpdate.Text = $"New Update V{versionNum} Available!";
             }
             MainForm.instance.linkNewUpdate.Visible = true;
 

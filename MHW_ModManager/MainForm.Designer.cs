@@ -655,13 +655,15 @@
             // linkNewUpdate
             // 
             this.linkNewUpdate.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
+            this.linkNewUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.linkNewUpdate.AutoSize = true;
             this.linkNewUpdate.DisabledLinkColor = System.Drawing.Color.PaleTurquoise;
-            this.linkNewUpdate.Dock = System.Windows.Forms.DockStyle.Left;
-            this.linkNewUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkNewUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkNewUpdate.LinkColor = System.Drawing.Color.SandyBrown;
-            this.linkNewUpdate.Location = new System.Drawing.Point(246, 0);
+            this.linkNewUpdate.Location = new System.Drawing.Point(252, 5);
+            this.linkNewUpdate.Margin = new System.Windows.Forms.Padding(5);
             this.linkNewUpdate.Name = "linkNewUpdate";
-            this.linkNewUpdate.Size = new System.Drawing.Size(260, 28);
+            this.linkNewUpdate.Size = new System.Drawing.Size(153, 18);
             this.linkNewUpdate.TabIndex = 4;
             this.linkNewUpdate.TabStop = true;
             this.linkNewUpdate.Text = "New Update Available!";
