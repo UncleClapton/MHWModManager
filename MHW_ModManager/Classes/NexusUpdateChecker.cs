@@ -11,7 +11,7 @@ public class NexusUpdateChecker {
 
     public static async void CheckForNewVersion() {
 
-        string url = @"https://www.nexusmods.com/monsterhunterworld/mods/372?tab=files";
+        string url = @"https://raw.githubusercontent.com/UncleClapton/MHWModManager/master/VERSION";
 
         //api access not released yet
         //string url = @"https://api.nexusmods.com/v1/games/monsterhunterworld/mods/372";
@@ -26,16 +26,7 @@ public class NexusUpdateChecker {
                 content = reader.ReadToEnd();
             }
 
-            //doin this nonsense bc cant use the api yet
-            int idx = content.IndexOf("<meta property=\"twitter:data1\" content=\"");
-            if (idx == -1)
-                return;
-
-            string versionString = content.Substring(idx).SubstringIndexOf("content").SubstringIndexOf("\"", 1);
-            versionString = versionString.Substring(0, versionString.IndexOf('"'));
-
-            float versionNum = float.Parse(versionString);
-
+            float versionNum = float.Parse(content);
 
             if(versionNum <= MainForm.instance.modsData.version) {
                 MainForm.instance.linkNewUpdate.Text = "You Have the Latest Version";
