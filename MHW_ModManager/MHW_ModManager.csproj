@@ -253,8 +253,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>copy /Y  "$(SolutionDir)SevenZip\7z64.dll" "$(TargetDir)ModManagerData\7z.dll"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>if not exist "$(TargetDir)ModManagerData" md "$(TargetDir)ModManagerData"
