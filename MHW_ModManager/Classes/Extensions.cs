@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,5 +48,10 @@ public static class Extensions {
         return str.Substring(str.IndexOf(searchStr) + offset);
     }
 
+    public static void DeleteIfPathExists(this string path) {
+        if (File.Exists(path)) {
+            File.Delete(path);
+        }
+    }
 }
 
