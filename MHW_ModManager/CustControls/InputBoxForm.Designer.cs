@@ -33,9 +33,9 @@
             this.trackBarGeneric = new System.Windows.Forms.TrackBar();
             this.labelGeneric = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.buttonNoAll = new System.Windows.Forms.Button();
             this.buttonYesAll = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGeneric)).BeginInit();
             this.panel2.SuspendLayout();
@@ -162,6 +162,21 @@
             this.panel2.Size = new System.Drawing.Size(527, 119);
             this.panel2.TabIndex = 12;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(55)))));
+            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.richTextBox1.DetectUrls = false;
+            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.65F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.richTextBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.richTextBox1.Location = new System.Drawing.Point(20, 6);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.ReadOnly = true;
+            this.richTextBox1.Size = new System.Drawing.Size(488, 80);
+            this.richTextBox1.TabIndex = 16;
+            this.richTextBox1.Text = "";
+            this.richTextBox1.WordWrap = false;
+            // 
             // buttonNoAll
             // 
             this.buttonNoAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -183,21 +198,6 @@
             this.buttonYesAll.TabIndex = 14;
             this.buttonYesAll.Text = "Yes to all";
             this.buttonYesAll.UseVisualStyleBackColor = true;
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(55)))));
-            this.richTextBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.richTextBox1.DetectUrls = false;
-            this.richTextBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.65F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.richTextBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.richTextBox1.Location = new System.Drawing.Point(20, 6);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(488, 80);
-            this.richTextBox1.TabIndex = 16;
-            this.richTextBox1.Text = "";
-            this.richTextBox1.WordWrap = false;
             // 
             // InputBoxForm
             // 
@@ -226,14 +226,14 @@
         private System.Windows.Forms.Panel panel1;
         public System.Windows.Forms.Button buttonClose;
         public PassThroughLabel TitleLabel;
-        private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Button buttonOK;
         public System.Windows.Forms.TextBox textBoxInput;
         public System.Windows.Forms.CheckBox checkBoxGeneric1;
         public System.Windows.Forms.TrackBar trackBarGeneric;
         public System.Windows.Forms.Label labelGeneric;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Button buttonNoAll;
-        private System.Windows.Forms.Button buttonYesAll;
     public System.Windows.Forms.RichTextBox richTextBox1;
+    public System.Windows.Forms.Button buttonCancel;
+    public System.Windows.Forms.Button buttonOK;
+    public System.Windows.Forms.Button buttonNoAll;
+    public System.Windows.Forms.Button buttonYesAll;
 }

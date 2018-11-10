@@ -91,7 +91,7 @@ public static class ArchiveManager {
 
 
 
-    public static void InstallSelected(ModInfo mod) {
+    public static void InstallSelected(ModInfo mod, bool refresh = true) {
         try {
             if (!File.Exists(mod.modPath)) {
                 MainForm.instance.richBoxMod.AppendText("\nInstall Failed!\n     Mod archive not found!", Color.Crimson, true);
@@ -118,7 +118,7 @@ public static class ArchiveManager {
                             if (fileData.IsDirectory) continue;
                             fileCounter++;
 
-                            ArchiveFile matchFile = mod.archiveFiles.First(x => x.crc == fileData.Crc && x.path == fileData.FileName.FixSlashes());
+                            ArchiveFile matchFile = mod.archiveFiles.FirstOrDefault(x => x.crc == fileData.Crc && x.path == fileData.FileName.FixSlashes());
 
                             if (matchFile && matchFile.belongingNode.Checked) {
 
@@ -156,8 +156,7 @@ public static class ArchiveManager {
                             fileCounter++;
 
                             uint fileCRC = (uint)reader.Entry.Crc;
-                            ArchiveFile matchFile = mod.archiveFiles.First(x => x.crc == fileCRC && x.path == reader.Entry.Key.FixSlashes());
-
+                            ArchiveFile matchFile = mod.archiveFiles.FirstOrDefault(x => x.crc == fileCRC && x.path == reader.Entry.Key.FixSlashes());
 
                             if (matchFile && matchFile.belongingNode.Checked) {
 
@@ -188,14 +187,15 @@ public static class ArchiveManager {
             }
 
 
-            
 
-            MainForm.SaveData();
-            MainForm.RefreshListView();
-            MainForm.RefreshTreeView();
+            if (refresh) {
+                MainForm.SaveData();
+                MainForm.RefreshListView();
+                MainForm.RefreshTreeView();
 
-            MainForm.instance.richBoxMod.AppendText("\n");
-            MainForm.instance.richBoxMod.AppendText("Install Succesful!", Color.LawnGreen, true);
+                MainForm.instance.richBoxMod.AppendText("\n");
+                MainForm.instance.richBoxMod.AppendText("Install Succesful!", Color.LawnGreen, true);
+            }
 
         } catch (Exception ex) {
             Console.WriteLine(ex);
@@ -234,18 +234,42 @@ public static class ArchiveManager {
     }
 
 
-    public static void UninstallSelected(ModInfo mod) {
+    public static void UninstallSelected(ModInfo mod, bool refresh = true, bool checkForMatchingCRC = false) {
         foreach (var file in mod.archiveFiles) {
-            if (!file.isDir && file.belongingNode.Checked && File.Exists(file.installedPath)) {
-                RecycleManager.DeleteNoWarn(file.installedPath);
+            if (!file.isDir && file.belongingNode.Checked) {
+                if (File.Exists(file.installedPath)) {
+                    if (checkForMatchingCRC) {
+                        uint fileCRC = file.GetInstalledCRC();
+                        if (file.crc != fileCRC)
+                            goto finish;
+                    }
+
+                    RecycleManager.DeleteNoWarn(file.installedPath);
+                    file.installedCRC = 0;
+                }
+
+                finish:
+                file.installed = false;
             }
         }
 
-        MainForm.SaveData();
-        MainForm.RefreshListView();
-        MainForm.RefreshTreeView();
+        if (refresh) {
+            MainForm.SaveData();
+            MainForm.RefreshListView();
+            MainForm.RefreshTreeView();
+        }
     }
 
+
+    public static void DeleteEmptyDirs(string startLocation) {
+        foreach (var directory in Directory.GetDirectories(startLocation)) {
+            DeleteEmptyDirs(directory);
+            if (Directory.GetFiles(directory).Length == 0 &&
+                Directory.GetDirectories(directory).Length == 0) {
+                Directory.Delete(directory, false);
+            }
+        }
+    }
 
 
 }

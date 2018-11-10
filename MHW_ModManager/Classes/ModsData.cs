@@ -12,6 +12,8 @@ public class ModsData {
     public string modDir = "nativePC";
     public float version;
 
+    public string lastSaveDialoguePath = "";
+
     public bool useTopLevelFiles = false;
 
     public List<ModInfo> modInfos = new List<ModInfo>();

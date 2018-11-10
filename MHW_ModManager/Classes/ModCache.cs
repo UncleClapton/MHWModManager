@@ -24,12 +24,19 @@ public class ModCache {
         IEnumerable<string> newMods = paths.Where(filePath => !MainForm.instance.modsData.modInfos.Exists(mI => mI.modPath == filePath));
 
         foreach (string file in newMods) {
-            ModInfo tMod = new ModInfo(file);
-            if (tMod.archiveFiles != null) {
-                MainForm.instance.modsData.modInfos.Add(tMod);
-                foreach (var archFile in tMod.archiveFiles) {
-                    if (!archFile.parent)
-                        archFile.GetInstalled();
+            ModInfo matchMod = MainForm.instance.modsData.modInfos.Find(x => x.modName == Path.GetFileName(file));
+
+            if (matchMod) {
+                matchMod.modPath = file;
+
+            } else {
+                ModInfo tMod = new ModInfo(file);
+                if (tMod.archiveFiles != null) {
+                    MainForm.instance.modsData.modInfos.Add(tMod);
+                    foreach (var archFile in tMod.archiveFiles) {
+                        if (!archFile.parent)
+                            archFile.GetInstalled();
+                    }
                 }
             }
         }

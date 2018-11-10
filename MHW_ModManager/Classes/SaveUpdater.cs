@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-public static class Updater {
+public static class SaveUpdater {
     public static void UpdateSaveData(ModsData modsData) {
 
         if(modsData.version < 1.1) {
@@ -17,11 +17,6 @@ public static class Updater {
             }
         }
 
-        if(modsData.version < 1.2) {
-            foreach (ModInfo mod in modsData.modInfos) {
-
-            }
-        }
 
         modsData.version = MainForm.programVersion;
     }

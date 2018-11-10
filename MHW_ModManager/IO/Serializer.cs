@@ -17,6 +17,8 @@ public class Serializer {
 
     public static string GetModsCacheFolder() => GetMMDataFolder() + "ModsCache\\";
 
+    public static string GetGameModFolder() => $"{MainForm.instance.modsData.gameDir.FixSlashes()}\\{MainForm.instance.modsData.modDir}";
+
     public static string GetExeDir() => Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
 
     public const string modsDataFileName = "mods.db";

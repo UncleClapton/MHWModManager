@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 public partial class MainForm : Form {
 
 
-    public const float programVersion = 1.3f;
+    public const float programVersion = 1.4f;
 
     public static MainForm instance;
     public ModsData modsData;
@@ -48,7 +48,7 @@ public partial class MainForm : Form {
         if (!modsData) {
             modsData = new ModsData();
         } else {
-            Updater.UpdateSaveData(modsData);
+            SaveUpdater.UpdateSaveData(modsData);
         }
 
         //modsData.modInfos = new List<ModInfo>();
@@ -273,6 +273,8 @@ public partial class MainForm : Form {
         buttonRescanInstall.Text = "Scanning...";
         buttonRescanInstall.Refresh();
 
+        ModCache.ReCheckMods(modsData.modInfos);
+
         foreach (var mod in modsData.modInfos) {
             mod.CheckIfInstalled();
         }
@@ -396,6 +398,7 @@ public partial class MainForm : Form {
 
         buttonCheckAll_Click(null, null);
         ArchiveManager.InstallSelected(selMod);
+        ArchiveManager.DeleteEmptyDirs(Serializer.GetGameModFolder());
     }
 
     private void olvModList_AfterSorting(object sender, BrightIdeasSoftware.AfterSortingEventArgs e) {
@@ -409,6 +412,7 @@ public partial class MainForm : Form {
         if (!selMod) return;
 
         ArchiveManager.UninstallSelected(selMod);
+        ArchiveManager.DeleteEmptyDirs(Serializer.GetGameModFolder());
     }
 
     private void buttonInstallSelected_Click(object sender, EventArgs e) {
@@ -468,7 +472,13 @@ public partial class MainForm : Form {
     }
 
 
+    private void buttonSaveLoadout_Click(object sender, EventArgs e) {
+        LoadoutManager.SaveLoadout();
+    }
 
+    private void buttonLoadLoadout_Click(object sender, EventArgs e) {
+        LoadoutManager.LoadLoadout();
+    }
 
     //window managemnet
     private void buttonClose_Click(object sender, EventArgs e) {
@@ -564,7 +574,7 @@ public partial class MainForm : Form {
             }
         }
 
-        if(m.Msg == WM_NCCALCSIZE) {
+        if (m.Msg == WM_NCCALCSIZE) {
             if (m.WParam.Equals(IntPtr.Zero)) {
                 RECT rc = (RECT)m.GetLParam(typeof(RECT));
                 Rectangle r = rc.ToRectangle();
@@ -585,8 +595,6 @@ public partial class MainForm : Form {
         if (!handled)
             base.WndProc(ref m);
     }
-
-
 
 
 }

@@ -16,8 +16,11 @@ public static class Extensions {
 
         return retStr;
     }
-
-
+    
+    public static void CenterText(this RichTextBox box) {
+        box.SelectAll();
+        box.SelectionAlignment = HorizontalAlignment.Center;
+    }
 
     public static void AppendText(this RichTextBox box, string text, Color color, bool addNewLine = false) {
         box.SuspendLayout();

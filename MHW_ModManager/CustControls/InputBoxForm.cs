@@ -86,6 +86,7 @@ public partial class InputBoxForm : Form {
         wBox.TitleLabel.ForeColor = Color.Crimson;
         wBox.labelGeneric.Height += 25;
         wBox.Width += 50;
+        wBox.richTextBox1.Width += 50;
         wBox.labelGeneric.Visible = true;
 
         wBox.labelGeneric.Text = message;

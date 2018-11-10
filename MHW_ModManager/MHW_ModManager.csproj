@@ -84,8 +84,9 @@
   <ItemGroup>
     <Compile Include="Classes\ArchiveFile.cs" />
     <Compile Include="Classes\ArchiveManager.cs" />
+    <Compile Include="Classes\LoadoutManager.cs" />
     <Compile Include="Classes\NexusUpdateChecker.cs" />
-    <Compile Include="Classes\Updater.cs" />
+    <Compile Include="Classes\SaveUpdater.cs" />
     <Compile Include="IO\CRC32.cs" />
     <Compile Include="CustControls\DraggablePanel.cs">
       <SubType>Component</SubType>
