@@ -19,6 +19,7 @@ public class NexusUpdateChecker {
 
         try {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.CachePolicy = new System.Net.Cache.RequestCachePolicy(System.Net.Cache.RequestCacheLevel.NoCacheNoStore);
             request.ContentType = "application/json";
             using (HttpWebResponse response = (HttpWebResponse)await request.GetResponseAsync())
             using (Stream stream = response.GetResponseStream())
