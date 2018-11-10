@@ -36,7 +36,8 @@ public class NexusUpdateChecker {
             }
             MainForm.instance.linkNewUpdate.Visible = true;
 
-            Console.WriteLine(versionNum);
+            Console.WriteLine("OnlineVersion: " + versionNum);
+            Console.WriteLine("LocalVersion: " + MainForm.programVersion);
         } catch (Exception ex){
             Console.WriteLine("UpdateCheckFailed\n" + ex.Message);
             MainForm.instance.linkNewUpdate.Text = "Check For Updates";
