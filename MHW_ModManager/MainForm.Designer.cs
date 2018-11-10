@@ -613,7 +613,9 @@
             this.buttonLoadLoadout.Size = new System.Drawing.Size(126, 25);
             this.buttonLoadLoadout.TabIndex = 6;
             this.buttonLoadLoadout.Text = "Load Loadout";
-            this.tip.SetToolTip(this.buttonLoadLoadout, "This simply loads the state of your");
+            this.tip.SetToolTip(this.buttonLoadLoadout, "This simply loads the state of your mods from a previously saved loadout file.\r\nI" +
+        "t will give appropriate warnings if new mods have been added or if some archives" +
+        " are missing.");
             this.buttonLoadLoadout.UseVisualStyleBackColor = false;
             this.buttonLoadLoadout.Click += new System.EventHandler(this.buttonLoadLoadout_Click);
             // 
