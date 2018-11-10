@@ -38,7 +38,7 @@ public partial class MainForm : Form {
 
         olvColumnSize.AspectToStringConverter = (object sizeFloat) => ModInfo.SizeSuffixer((float)sizeFloat);
 
-        labelTitle.Text = "MHW Mod Managaer - By: BoltMan  V" + programVersion;
+        labelTitle.Text = $"MHW Mod Managaer V{programVersion} - By: BoltMan";
 
         NexusUpdateChecker.CheckForNewVersion();
     }
@@ -480,6 +480,24 @@ public partial class MainForm : Form {
         LoadoutManager.LoadLoadout();
     }
 
+    private void linkCredits_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e) {
+        var credBox = InputBoxForm.OKBOX("Credits");
+        credBox.TitleLabel.ForeColor = Color.White;
+
+        credBox.richTextBox1.Height += 20;
+        credBox.Height += 25;
+
+        credBox.richTextBox1.Font = new Font("Microsoft Sans Serif", 12);
+        credBox.panelBG.BorderStyle = BorderStyle.Fixed3D;
+
+        credBox.richTextBox1.AppendText("BoltMan: Project Creator", Color.MediumSlateBlue, true);
+        credBox.richTextBox1.AppendText("UncleClapton: Repo Manager/Contributor", Color.RoyalBlue, true);
+
+        credBox.richTextBox1.CenterText();
+
+        credBox.ShowDialog();
+    }
+
     //window managemnet
     private void buttonClose_Click(object sender, EventArgs e) {
         Close();
@@ -596,5 +614,5 @@ public partial class MainForm : Form {
             base.WndProc(ref m);
     }
 
-
+    
 }

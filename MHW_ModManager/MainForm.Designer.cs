@@ -72,6 +72,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonClose = new System.Windows.Forms.Button();
+            this.linkCredits = new System.Windows.Forms.LinkLabel();
             this.linkNewUpdate = new System.Windows.Forms.LinkLabel();
             this.labelTitle = new PassThroughLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitListAndRest)).BeginInit();
@@ -157,12 +158,14 @@
             // olvColumnName
             // 
             this.olvColumnName.AspectName = "modName";
+            this.olvColumnName.CellPadding = null;
             this.olvColumnName.Text = "Name";
             this.olvColumnName.Width = 180;
             // 
             // olvColumnInstalled
             // 
             this.olvColumnInstalled.AspectName = "intalledText";
+            this.olvColumnInstalled.CellPadding = null;
             this.olvColumnInstalled.Text = "Status";
             this.olvColumnInstalled.Width = 110;
             // 
@@ -170,17 +173,20 @@
             // 
             this.olvColumnSize.AspectName = "fileSize";
             this.olvColumnSize.AspectToStringFormat = "sizeSuffixed";
+            this.olvColumnSize.CellPadding = null;
             this.olvColumnSize.Text = "Size";
             // 
             // olvColumnDate
             // 
             this.olvColumnDate.AspectName = "date";
+            this.olvColumnDate.CellPadding = null;
             this.olvColumnDate.Text = "Date Created";
             this.olvColumnDate.Width = 100;
             // 
             // olvColumnCat
             // 
             this.olvColumnCat.AspectName = "category";
+            this.olvColumnCat.CellPadding = null;
             this.olvColumnCat.Text = "Category";
             this.olvColumnCat.Width = 88;
             // 
@@ -681,6 +687,7 @@
             this.topPanel.Controls.Add(this.button2);
             this.topPanel.Controls.Add(this.button1);
             this.topPanel.Controls.Add(this.buttonClose);
+            this.topPanel.Controls.Add(this.linkCredits);
             this.topPanel.Controls.Add(this.linkNewUpdate);
             this.topPanel.Controls.Add(this.labelTitle);
             this.topPanel.Dock = System.Windows.Forms.DockStyle.Top;
@@ -731,6 +738,23 @@
             this.buttonClose.UseVisualStyleBackColor = true;
             this.buttonClose.Click += new System.EventHandler(this.buttonClose_Click);
             // 
+            // linkCredits
+            // 
+            this.linkCredits.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.linkCredits.DisabledLinkColor = System.Drawing.Color.PaleTurquoise;
+            this.linkCredits.Dock = System.Windows.Forms.DockStyle.Left;
+            this.linkCredits.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.linkCredits.LinkColor = System.Drawing.Color.AliceBlue;
+            this.linkCredits.Location = new System.Drawing.Point(282, 0);
+            this.linkCredits.Margin = new System.Windows.Forms.Padding(0);
+            this.linkCredits.Name = "linkCredits";
+            this.linkCredits.Size = new System.Drawing.Size(105, 28);
+            this.linkCredits.TabIndex = 5;
+            this.linkCredits.TabStop = true;
+            this.linkCredits.Text = "and Company";
+            this.linkCredits.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.linkCredits.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkCredits_LinkClicked_1);
+            // 
             // linkNewUpdate
             // 
             this.linkNewUpdate.ActiveLinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(80)))), ((int)(((byte)(80)))));
@@ -739,7 +763,7 @@
             this.linkNewUpdate.DisabledLinkColor = System.Drawing.Color.PaleTurquoise;
             this.linkNewUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkNewUpdate.LinkColor = System.Drawing.Color.SandyBrown;
-            this.linkNewUpdate.Location = new System.Drawing.Point(252, 5);
+            this.linkNewUpdate.Location = new System.Drawing.Point(393, 5);
             this.linkNewUpdate.Margin = new System.Windows.Forms.Padding(5);
             this.linkNewUpdate.Name = "linkNewUpdate";
             this.linkNewUpdate.Size = new System.Drawing.Size(153, 18);
@@ -756,11 +780,12 @@
             this.labelTitle.Dock = System.Windows.Forms.DockStyle.Left;
             this.labelTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.Location = new System.Drawing.Point(0, 0);
+            this.labelTitle.Margin = new System.Windows.Forms.Padding(0);
             this.labelTitle.Name = "labelTitle";
-            this.labelTitle.Padding = new System.Windows.Forms.Padding(5);
-            this.labelTitle.Size = new System.Drawing.Size(246, 28);
+            this.labelTitle.Padding = new System.Windows.Forms.Padding(5, 5, 0, 5);
+            this.labelTitle.Size = new System.Drawing.Size(282, 28);
             this.labelTitle.TabIndex = 0;
-            this.labelTitle.Text = "MHW Mod Manager - By: BoltMan";
+            this.labelTitle.Text = "MHW Mod Manager V1.40 - By: BoltMan";
             this.labelTitle.TextAlign = System.Drawing.ContentAlignment.BottomLeft;
             // 
             // MainForm
@@ -861,6 +886,7 @@
     public System.Windows.Forms.LinkLabel linkNewUpdate;
     private System.Windows.Forms.Button buttonSaveLoadout;
     private System.Windows.Forms.Button buttonLoadLoadout;
+    public System.Windows.Forms.LinkLabel linkCredits;
 }
 
 

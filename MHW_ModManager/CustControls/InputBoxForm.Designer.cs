@@ -23,6 +23,7 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InputBoxForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.buttonClose = new System.Windows.Forms.Button();
             this.TitleLabel = new PassThroughLabel();
@@ -32,13 +33,13 @@
             this.checkBoxGeneric1 = new System.Windows.Forms.CheckBox();
             this.trackBarGeneric = new System.Windows.Forms.TrackBar();
             this.labelGeneric = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panelBG = new System.Windows.Forms.Panel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.buttonNoAll = new System.Windows.Forms.Button();
             this.buttonYesAll = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGeneric)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.panelBG.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -144,23 +145,23 @@
             this.labelGeneric.Text = "labelGeneric";
             this.labelGeneric.Visible = false;
             // 
-            // panel2
+            // panelBG
             // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(55)))));
-            this.panel2.Controls.Add(this.richTextBox1);
-            this.panel2.Controls.Add(this.buttonNoAll);
-            this.panel2.Controls.Add(this.buttonYesAll);
-            this.panel2.Controls.Add(this.checkBoxGeneric1);
-            this.panel2.Controls.Add(this.trackBarGeneric);
-            this.panel2.Controls.Add(this.buttonCancel);
-            this.panel2.Controls.Add(this.buttonOK);
-            this.panel2.Controls.Add(this.textBoxInput);
-            this.panel2.Controls.Add(this.labelGeneric);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(0, 22);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(527, 119);
-            this.panel2.TabIndex = 12;
+            this.panelBG.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(50)))), ((int)(((byte)(50)))), ((int)(((byte)(55)))));
+            this.panelBG.Controls.Add(this.richTextBox1);
+            this.panelBG.Controls.Add(this.buttonNoAll);
+            this.panelBG.Controls.Add(this.buttonYesAll);
+            this.panelBG.Controls.Add(this.checkBoxGeneric1);
+            this.panelBG.Controls.Add(this.trackBarGeneric);
+            this.panelBG.Controls.Add(this.buttonCancel);
+            this.panelBG.Controls.Add(this.buttonOK);
+            this.panelBG.Controls.Add(this.textBoxInput);
+            this.panelBG.Controls.Add(this.labelGeneric);
+            this.panelBG.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelBG.Location = new System.Drawing.Point(0, 22);
+            this.panelBG.Name = "panelBG";
+            this.panelBG.Size = new System.Drawing.Size(527, 119);
+            this.panelBG.TabIndex = 12;
             // 
             // richTextBox1
             // 
@@ -176,6 +177,7 @@
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             this.richTextBox1.WordWrap = false;
+            this.richTextBox1.Enter += new System.EventHandler(this.richTextBox1_Enter);
             // 
             // buttonNoAll
             // 
@@ -205,9 +207,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(30)))), ((int)(((byte)(45)))));
             this.ClientSize = new System.Drawing.Size(527, 141);
-            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.panelBG);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InputBoxForm";
             this.Text = "Input Box";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.InputBoxForm_FormClosing_1);
@@ -215,8 +218,8 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGeneric)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.panelBG.ResumeLayout(false);
+            this.panelBG.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -230,10 +233,10 @@
         public System.Windows.Forms.CheckBox checkBoxGeneric1;
         public System.Windows.Forms.TrackBar trackBarGeneric;
         public System.Windows.Forms.Label labelGeneric;
-        private System.Windows.Forms.Panel panel2;
     public System.Windows.Forms.RichTextBox richTextBox1;
     public System.Windows.Forms.Button buttonCancel;
     public System.Windows.Forms.Button buttonOK;
     public System.Windows.Forms.Button buttonNoAll;
     public System.Windows.Forms.Button buttonYesAll;
+    public System.Windows.Forms.Panel panelBG;
 }

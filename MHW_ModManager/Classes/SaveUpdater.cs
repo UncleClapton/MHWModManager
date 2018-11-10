@@ -17,14 +17,6 @@ public static class SaveUpdater {
             }
         }
 
-<<<<<<< HEAD:MHW_ModManager/Classes/SaveUpdater.cs
-=======
-        if (modsData.version < 1.2f) {
-            foreach (ModInfo mod in modsData.modInfos) {
-
-            }
-        }
->>>>>>> master:MHW_ModManager/Classes/Updater.cs
 
         if (modsData.version < 1.4f) {
             string path = Serializer.GetMMDataFolder();

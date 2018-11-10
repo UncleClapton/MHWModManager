@@ -13,7 +13,7 @@ using System.Windows.Forms;
 public partial class InputBoxForm : Form {
     public InputBoxForm() {
         InitializeComponent();
-        CenterToScreen();
+        CenterToScreen();        
     }
 
 
@@ -79,7 +79,7 @@ public partial class InputBoxForm : Form {
         textBoxInput.Visible = false;
     }
 
-    public static InputBoxForm OKBOX(string title, string message, string okText = "OK") {
+    public static InputBoxForm OKBOX(string title, string message = "", string okText = "OK") {
         InputBoxForm wBox = new InputBoxForm();
 
         wBox.TitleLabel.Text = title;
@@ -115,6 +115,15 @@ public partial class InputBoxForm : Form {
         return false;
     }
 
+
+    [DllImport("user32.dll", EntryPoint = "ShowCaret")]
+    public static extern long ShowCaret(IntPtr hwnd);
+    [DllImport("user32.dll", EntryPoint = "HideCaret")]
+    public static extern long HideCaret(IntPtr hwnd);
+
+    private void richTextBox1_Enter(object sender, EventArgs e) {
+        HideCaret(richTextBox1.Handle);
+    }
 
     //end class
 }
