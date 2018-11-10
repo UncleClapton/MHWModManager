@@ -492,6 +492,8 @@ public partial class MainForm : Form {
 
         credBox.richTextBox1.AppendText("BoltMan: Project Creator", Color.MediumSlateBlue, true);
         credBox.richTextBox1.AppendText("UncleClapton: Repo Manager/Contributor", Color.RoyalBlue, true);
+        credBox.richTextBox1.AppendText("", Color.RoyalBlue, true);
+        credBox.richTextBox1.AppendText("You can contribute @ https://github.com/UncleClapton/MHWModManager", Color.Orange, false);
 
         credBox.richTextBox1.CenterText();
 
