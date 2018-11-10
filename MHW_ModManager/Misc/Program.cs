@@ -14,7 +14,7 @@ namespace MHWModManager {
         /// </summary>
         [STAThread]
         static void Main() {
-            try {
+            /*try {
 
                 AppDomain.CurrentDomain.AssemblyResolve += (s, e) => {
                     //This handler is called only when the common language runtime tries to bind to the assembly and fails.
@@ -56,7 +56,7 @@ namespace MHWModManager {
                 };
             } catch {
                 
-            }
+            }*/
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
