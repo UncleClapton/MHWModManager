@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
+using System.ComponentModel;
 
 [Serializable]
 public class ModInfo {
@@ -64,17 +65,18 @@ public class ModInfo {
 
     public string intalledText {
         get {
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(MainForm));
             string textValue = "";
             if (installed) {
-                textValue = "Installed";
+                textValue = resources.GetString("IntalledText.Installed");
             } else if (partiallyInstalled) {
-                textValue = archiveFiles.Any(x => x.installedNotMatching) ? "Conflicting" : "Partial";
+                textValue = archiveFiles.Any(x => x.installedNotMatching) ? resources.GetString("IntalledText.Conflicting") : resources.GetString("IntalledText.Partial");
             } else {
-                textValue = "Not Installed";
+                textValue = resources.GetString("IntalledText.NoArchive");
             }
 
             if (!archiveExists)
-                textValue = "No Archive - " + textValue;
+                textValue = resources.GetString("IntalledText.NoInstalled") + textValue;
 
             return textValue;
         }
@@ -93,15 +95,16 @@ public class ModInfo {
     }
 
     public void SetInfo(RichTextBox textBox) {
+        ComponentResourceManager resources = new ComponentResourceManager(typeof(MainForm));
         textBox.Clear();
-        textBox.AppendText("Path: "); textBox.AppendText(shortPath, archiveExists ? Color.LawnGreen : Color.Tomato, true);
+        textBox.AppendText(resources.GetString("FileInformation.Path")); textBox.AppendText(shortPath, archiveExists ? Color.LawnGreen : Color.Tomato, true);
 
-        textBox.AppendText("Size: "); textBox.AppendText(sizeSuffixed, Color.Teal, true);
+        textBox.AppendText(resources.GetString("FileInformation.Size")); textBox.AppendText(sizeSuffixed, Color.Teal, true);
 
 
         var sameMods = FindModsThatChangeSameFiles();
         if (sameMods.Count() > 0) {
-            textBox.AppendText("Mods that change files also included in this archive: \n");
+            textBox.AppendText(resources.GetString("FileCheck.Existence"));
 
             foreach (var mod in sameMods) {
                 textBox.AppendText(mod.shortPath, Color.Orange, true);

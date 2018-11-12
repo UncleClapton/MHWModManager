@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,6 @@ using System.Windows.Forms;
 [Serializable]
 public class ArchiveFile {
     static ModsData modsData => MainForm.instance.modsData;
-
     public string path;
     public uint crc;
     public bool isDir;
@@ -91,17 +91,18 @@ public class ArchiveFile {
     }
 
     public void SetInfo(RichTextBox textBox, TreeNode node) {
+        ComponentResourceManager resources = new ComponentResourceManager(typeof(MainForm));
         textBox.Clear();
 
-        textBox.AppendText("Path: "); textBox.AppendText(path, node.ForeColor, true);
-        textBox.AppendText("Status: " + node.ToolTipText, Color.WhiteSmoke, true);
-        textBox.AppendText("Size: "); textBox.AppendText(sizeSuffixed, Color.AliceBlue, true);
+        textBox.AppendText(resources.GetString("FileInformation.Path")); textBox.AppendText(path, node.ForeColor, true);
+        textBox.AppendText(resources.GetString("FileInformation.Status") + node.ToolTipText, Color.WhiteSmoke, true);
+        textBox.AppendText(resources.GetString("FileInformation.Size"));textBox.AppendText(sizeSuffixed, Color.AliceBlue, true);
 
         if (!isDir) {
-            textBox.AppendText("CRC: "); textBox.AppendText(crc.ToString("X"), Color.Cyan, true);
+            textBox.AppendText(resources.GetString("FileInformation.CRC")); textBox.AppendText(crc.ToString("X"), Color.Cyan, true);
 
             if (installedNotMatching) {
-                textBox.AppendText("Installed CRC: "); textBox.AppendText(installedCRC.ToString("X"), node.ForeColor, true);
+                textBox.AppendText(resources.GetString("FileInformation.InstalledCRC")); textBox.AppendText(installedCRC.ToString("X"), node.ForeColor, true);
             }
 
         }
@@ -110,7 +111,7 @@ public class ArchiveFile {
         var actMods = FindActualCrcMod();
         if (actMods != null && actMods.Count() > 0) {
             string plural = actMods.Count() > 1 ? "s" : "";
-            textBox.AppendText($"Mod{plural} that this file is from:", Color.WhiteSmoke, true);
+            textBox.AppendText($"Mod{plural} " + resources.GetString("FileCheck.From"), Color.WhiteSmoke, true);
             foreach (var mod in actMods) {
                 textBox.AppendText("    " + mod.shortPath, Color.Coral, true);
             }
@@ -119,7 +120,7 @@ public class ArchiveFile {
 
         var sameMods = FindModsWithSameFile().Distinct();
         if (sameMods.Count() > 0) {
-            textBox.AppendText("Mods that also change this file: \n");
+            textBox.AppendText(resources.GetString("FileCheck.Change"));
 
             foreach (var mod in sameMods) {
                 textBox.AppendText("    " + mod.shortPath, Color.Orange, true);

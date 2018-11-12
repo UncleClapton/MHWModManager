@@ -18,6 +18,7 @@ public partial class MainForm : Form {
 
     public const float programVersion = 1.4f;
 
+    public ComponentResourceManager resources = new ComponentResourceManager(typeof(MainForm));
     public static MainForm instance;
     public ModsData modsData;
 
@@ -37,8 +38,7 @@ public partial class MainForm : Form {
         LoadData();
 
         olvColumnSize.AspectToStringConverter = (object sizeFloat) => ModInfo.SizeSuffixer((float)sizeFloat);
-
-        labelTitle.Text = $"MHW Mod Managaer V{programVersion} - By: BoltMan";
+        labelTitle.Text = resources.GetString("labelTitle.TextReplace") + $" V{programVersion} - By: BoltMan";
 
         NexusUpdateChecker.CheckForNewVersion();
     }
@@ -279,7 +279,7 @@ public partial class MainForm : Form {
             mod.CheckIfInstalled();
         }
 
-        buttonRescanInstall.Text = "Re-Scan Installations";
+        buttonRescanInstall.Text = resources.GetString("buttonRescanInstall.Text");
 
         SaveData();
 
@@ -484,14 +484,15 @@ public partial class MainForm : Form {
         var credBox = InputBoxForm.OKBOX("Credits");
         credBox.TitleLabel.ForeColor = Color.White;
 
-        credBox.richTextBox1.Height += 20;
-        credBox.Height += 25;
+        credBox.richTextBox1.Height += 40;
+        credBox.Height += 55;
 
         credBox.richTextBox1.Font = new Font("Microsoft Sans Serif", 12);
         credBox.panelBG.BorderStyle = BorderStyle.Fixed3D;
 
-        credBox.richTextBox1.AppendText("BoltMan: Project Creator", Color.MediumSlateBlue, true);
-        credBox.richTextBox1.AppendText("UncleClapton: Repo Manager/Contributor", Color.RoyalBlue, true);
+        credBox.richTextBox1.AppendText("BoltMan: " + resources.GetString("Project.Creator"), Color.MediumSlateBlue, true);
+        credBox.richTextBox1.AppendText("UncleClapton: " + resources.GetString("Project.Manager"), Color.RoyalBlue, true);
+        credBox.richTextBox1.AppendText("HalcyonAlcedo: " + resources.GetString("Project.Translate-zh"), Color.OrangeRed, true);
         credBox.richTextBox1.AppendText("", Color.RoyalBlue, true);
         credBox.richTextBox1.AppendText("You can contribute @ https://github.com/UncleClapton/MHWModManager", Color.Orange, false);
 

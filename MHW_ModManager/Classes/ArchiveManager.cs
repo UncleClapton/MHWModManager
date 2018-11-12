@@ -7,6 +7,7 @@ using SevenZip;
 using SharpCompress.Readers;
 using System.Drawing;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 public static class ArchiveManager {
 
@@ -93,8 +94,9 @@ public static class ArchiveManager {
 
     public static void InstallSelected(ModInfo mod, bool refresh = true) {
         try {
+            ComponentResourceManager resources = new ComponentResourceManager(typeof(MainForm));
             if (!File.Exists(mod.modPath)) {
-                MainForm.instance.richBoxMod.AppendText("\nInstall Failed!\n     Mod archive not found!", Color.Crimson, true);
+                MainForm.instance.richBoxMod.AppendText(resources.GetString("Install.Failed"), Color.Crimson, true);
                 return;
             }
 
@@ -194,7 +196,7 @@ public static class ArchiveManager {
                 MainForm.RefreshTreeView();
 
                 MainForm.instance.richBoxMod.AppendText("\n");
-                MainForm.instance.richBoxMod.AppendText("Install Succesful!", Color.LawnGreen, true);
+                MainForm.instance.richBoxMod.AppendText(resources.GetString("Install.Succesful"), Color.LawnGreen, true);
             }
 
         } catch (Exception ex) {
