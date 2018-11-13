@@ -70,6 +70,11 @@ public partial class MainForm : Form {
 
         GetSelectedMod();
         olvModList.Focus();
+        Language Language = new Language();
+        if (!this.DesignMode)
+        {
+            Language.InitLanguage(this);
+        }
     }
 
 

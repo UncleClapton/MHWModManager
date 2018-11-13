@@ -93,8 +93,9 @@ public static class ArchiveManager {
 
     public static void InstallSelected(ModInfo mod, bool refresh = true) {
         try {
+            Language Language = new Language();
             if (!File.Exists(mod.modPath)) {
-                MainForm.instance.richBoxMod.AppendText("\nInstall Failed!\n     Mod archive not found!", Color.Crimson, true);
+                MainForm.instance.richBoxMod.AppendText("\n"+ Language.GetLanguageText("Install Failed!") + "\n     " + Language.GetLanguageText("Mod archive not found!"), Color.Crimson, true);
                 return;
             }
 
@@ -194,32 +195,34 @@ public static class ArchiveManager {
                 MainForm.RefreshTreeView();
 
                 MainForm.instance.richBoxMod.AppendText("\n");
-                MainForm.instance.richBoxMod.AppendText("Install Succesful!", Color.LawnGreen, true);
+                MainForm.instance.richBoxMod.AppendText(Language.GetLanguageText("Install Succesful!"), Color.LawnGreen, true);
             }
 
         } catch (Exception ex) {
+            Language Language = new Language();
             Console.WriteLine(ex);
 
             MainForm.instance.richBoxMod.AppendText("\n");
-            MainForm.instance.richBoxMod.AppendText("Install Failed! Please copy and paste this error\n     and send it to the mod author please!", Color.Crimson, true);
+            MainForm.instance.richBoxMod.AppendText(Language.GetLanguageText("Install Failed! Please copy and paste this error") + "\n     " + Language.GetLanguageText("and send it to the mod author please!"), Color.Crimson, true);
             MainForm.instance.richBoxMod.AppendText(ex.ToString(), Color.Salmon, true);
         }
     }
 
     static void CheckWarnDialogue(ref bool skipWarnings, ref bool overwrite, int index, int fileCount, ArchiveFile matchFile) {
         if (!skipWarnings) {
+            Language Language = new Language();
             InputBoxForm warnDialogue = new InputBoxForm();
-            warnDialogue.YesNoSetup($"Overwrite file? ({index} of {fileCount})", "");
+            warnDialogue.YesNoSetup(Language.GetLanguageText("Overwrite file?") + $" ({index} of {fileCount})", "");
 
             warnDialogue.richTextBox1.AppendText(matchFile.path, Color.Cyan, true);
             var actMods = matchFile.FindActualCrcMod();
             if (actMods.Count() > 0) {
-                warnDialogue.richTextBox1.AppendText($"The file is from:", Color.WhiteSmoke, true);
+                warnDialogue.richTextBox1.AppendText(Language.GetLanguageText("The file is from:"), Color.WhiteSmoke, true);
                 foreach (var rMod in actMods) {
                     warnDialogue.richTextBox1.AppendText(rMod.shortPath, Color.Orange, true);
                 }
             } else {
-                warnDialogue.richTextBox1.AppendText($"It is unknown what mod this file belongs to.", Color.Coral, true);
+                warnDialogue.richTextBox1.AppendText(Language.GetLanguageText("It is unknown what mod this file belongs to."), Color.Coral, true);
             }
 
             warnDialogue.richTextBox1.SelectAll();

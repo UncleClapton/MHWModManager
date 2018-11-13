@@ -1,0 +1,30 @@
+{
+  "When enabled, files at the root of the archive will be ignored. This is good for ignoring files like Readme's that arent in any folders.": "勾选后，存档根目录中的文件将被忽略。这对于排除掉Mod说明文件是很有用的。",
+  "This file isn't found at all in the folder.": "被忽略，因为它是根目录文件，而“忽略根目录文件”选项是打开的。",
+  "Path": "文件路径：",
+  "Size": "大小",
+  "Status": "状态",
+  "Installed": "已安装文件",
+  "Not Installed": "未安装文件",
+  "that this file is from": "这个文件来自于：",
+  "Mods that also change this file:": "Mod变更文件：",
+  "Install Failed!": "安装失败！",
+  "Mod archive not found!": "无法找到Mod安装文件",
+  "Install Succesful!": "安装成功！",
+  "Install Failed! Please copy and paste this error": "安装失败！请复制此错误信息",
+  "and send it to the mod author please!": "把它发给MOD作者！",
+  "Overwrite file": "重写文件",
+  "The file is from:": "这个文件来自于：",
+  "It is unknown what mod this file belongs to.": "无法确认这个文件属于哪个Mod.",
+  "No Archive - ": "未找到文件 - ",
+  "Mods that change files also included in this archive:": "当前将改变的Mod文件也存在于这个安装包中：",
+  "You Have the Latest Version": "当前已是最新版本",
+  "New Update": "检测到新的可用更新",
+  "Available!": "",
+  "OnlineVersion": "最新版本",
+  "LocalVersion": "本地版本",
+  "UpdateCheckFailed": "更新检查失败",
+  "Check For Updates": "检查更新"
+
+
+}

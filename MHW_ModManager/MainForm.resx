@@ -123,6 +123,9 @@
   <metadata name="tip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>11, 7</value>
   </metadata>
+  <metadata name="tip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>11, 7</value>
+  </metadata>
   <data name="buttonSaveLoadout.ToolTip" xml:space="preserve">
     <value>Saves the current state of your installed mods to a file
 so you can load it later after changing up your mod list.
