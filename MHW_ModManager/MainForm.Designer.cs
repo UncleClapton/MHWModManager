@@ -101,7 +101,7 @@
             // splitListAndRest
             // 
             this.splitListAndRest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitListAndRest.Location = new System.Drawing.Point(3, 85);
+            this.splitListAndRest.Location = new System.Drawing.Point(3, 79);
             this.splitListAndRest.Margin = new System.Windows.Forms.Padding(0);
             this.splitListAndRest.Name = "splitListAndRest";
             // 
@@ -113,8 +113,8 @@
             // splitListAndRest.Panel2
             // 
             this.splitListAndRest.Panel2.Controls.Add(this.splitTreeAndInfo);
-            this.splitListAndRest.Size = new System.Drawing.Size(1470, 698);
-            this.splitListAndRest.SplitterDistance = 645;
+            this.splitListAndRest.Size = new System.Drawing.Size(1438, 644);
+            this.splitListAndRest.SplitterDistance = 630;
             this.splitListAndRest.TabIndex = 1;
             // 
             // olvModList
@@ -128,6 +128,7 @@
             this.olvModList.AllowColumnReorder = true;
             this.olvModList.AllowDrop = true;
             this.olvModList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(27)))));
+            this.olvModList.CellEditUseWholeCell = false;
             this.olvModList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumnName,
             this.olvColumnInstalled,
@@ -135,6 +136,7 @@
             this.olvColumnDate,
             this.olvColumnCat});
             this.olvModList.ContextMenuStrip = this.contextList;
+            this.olvModList.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvModList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.olvModList.EmptyListMsg = "Drag mod archives here or place them in folders and hit rescan cache to add them " +
     "to mod cache.";
@@ -145,7 +147,7 @@
             this.olvModList.MultiSelect = false;
             this.olvModList.Name = "olvModList";
             this.olvModList.ShowGroups = false;
-            this.olvModList.Size = new System.Drawing.Size(645, 656);
+            this.olvModList.Size = new System.Drawing.Size(630, 605);
             this.olvModList.TabIndex = 0;
             this.olvModList.UseCompatibleStateImageBehavior = false;
             this.olvModList.View = System.Windows.Forms.View.Details;
@@ -158,14 +160,12 @@
             // olvColumnName
             // 
             this.olvColumnName.AspectName = "modName";
-            this.olvColumnName.CellPadding = null;
             this.olvColumnName.Text = "Name";
             this.olvColumnName.Width = 180;
             // 
             // olvColumnInstalled
             // 
             this.olvColumnInstalled.AspectName = "intalledText";
-            this.olvColumnInstalled.CellPadding = null;
             this.olvColumnInstalled.Text = "Status";
             this.olvColumnInstalled.Width = 110;
             // 
@@ -173,20 +173,17 @@
             // 
             this.olvColumnSize.AspectName = "fileSize";
             this.olvColumnSize.AspectToStringFormat = "sizeSuffixed";
-            this.olvColumnSize.CellPadding = null;
             this.olvColumnSize.Text = "Size";
             // 
             // olvColumnDate
             // 
             this.olvColumnDate.AspectName = "date";
-            this.olvColumnDate.CellPadding = null;
             this.olvColumnDate.Text = "Date Created";
             this.olvColumnDate.Width = 100;
             // 
             // olvColumnCat
             // 
             this.olvColumnCat.AspectName = "category";
-            this.olvColumnCat.CellPadding = null;
             this.olvColumnCat.Text = "Category";
             this.olvColumnCat.Width = 88;
             // 
@@ -202,14 +199,14 @@
             this.reloadArchiveToolStripMenuItem});
             this.contextList.Name = "contextList";
             this.contextList.ShowImageMargin = false;
-            this.contextList.Size = new System.Drawing.Size(266, 136);
+            this.contextList.Size = new System.Drawing.Size(287, 136);
             this.contextList.Opening += new System.ComponentModel.CancelEventHandler(this.contextList_Opening);
             // 
             // deleteModArchiveToolStripMenuItem
             // 
             this.deleteModArchiveToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.deleteModArchiveToolStripMenuItem.Name = "deleteModArchiveToolStripMenuItem";
-            this.deleteModArchiveToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.deleteModArchiveToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
             this.deleteModArchiveToolStripMenuItem.Text = "Delete Mod Archive And Uninstall";
             this.deleteModArchiveToolStripMenuItem.Click += new System.EventHandler(this.deleteModArchiveToolStripMenuItem_Click);
             // 
@@ -217,7 +214,7 @@
             // 
             this.deleteModArchiveWithoutUninstallingToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.deleteModArchiveWithoutUninstallingToolStripMenuItem.Name = "deleteModArchiveWithoutUninstallingToolStripMenuItem";
-            this.deleteModArchiveWithoutUninstallingToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.deleteModArchiveWithoutUninstallingToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
             this.deleteModArchiveWithoutUninstallingToolStripMenuItem.Text = "Delete Mod Archive Without Uninstalling";
             this.deleteModArchiveWithoutUninstallingToolStripMenuItem.Click += new System.EventHandler(this.deleteModArchiveWithoutUninstallingToolStripMenuItem_Click);
             // 
@@ -225,7 +222,7 @@
             // 
             this.installAllFilesToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.installAllFilesToolStripMenuItem.Name = "installAllFilesToolStripMenuItem";
-            this.installAllFilesToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.installAllFilesToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
             this.installAllFilesToolStripMenuItem.Text = "Install ALL Files";
             this.installAllFilesToolStripMenuItem.Click += new System.EventHandler(this.installAllFilesToolStripMenuItem_Click);
             // 
@@ -233,7 +230,7 @@
             // 
             this.uninstallAllFilesToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.uninstallAllFilesToolStripMenuItem.Name = "uninstallAllFilesToolStripMenuItem";
-            this.uninstallAllFilesToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.uninstallAllFilesToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
             this.uninstallAllFilesToolStripMenuItem.Text = "Uninstall ALL Files";
             this.uninstallAllFilesToolStripMenuItem.Click += new System.EventHandler(this.uninstallAllFilesToolStripMenuItem_Click);
             // 
@@ -241,7 +238,7 @@
             // 
             this.openLocationToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.openLocationToolStripMenuItem.Name = "openLocationToolStripMenuItem";
-            this.openLocationToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.openLocationToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
             this.openLocationToolStripMenuItem.Text = "Open Location";
             this.openLocationToolStripMenuItem.Click += new System.EventHandler(this.openLocationToolStripMenuItem_Click);
             // 
@@ -249,7 +246,7 @@
             // 
             this.reloadArchiveToolStripMenuItem.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.reloadArchiveToolStripMenuItem.Name = "reloadArchiveToolStripMenuItem";
-            this.reloadArchiveToolStripMenuItem.Size = new System.Drawing.Size(265, 22);
+            this.reloadArchiveToolStripMenuItem.Size = new System.Drawing.Size(286, 22);
             this.reloadArchiveToolStripMenuItem.Text = "Reload Archive";
             this.reloadArchiveToolStripMenuItem.Click += new System.EventHandler(this.reloadArchiveToolStripMenuItem_Click);
             // 
@@ -263,12 +260,12 @@
             this.tableLayoutPanel3.Controls.Add(this.buttonDeleteNotFound, 0, 0);
             this.tableLayoutPanel3.Controls.Add(this.buttonRescanCache, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 656);
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 605);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(645, 42);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(630, 39);
             this.tableLayoutPanel3.TabIndex = 2;
             // 
             // buttonRescanInstall
@@ -276,10 +273,10 @@
             this.buttonRescanInstall.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonRescanInstall.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonRescanInstall.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.4F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonRescanInstall.Location = new System.Drawing.Point(431, 0);
+            this.buttonRescanInstall.Location = new System.Drawing.Point(421, 0);
             this.buttonRescanInstall.Margin = new System.Windows.Forms.Padding(1, 0, 0, 0);
             this.buttonRescanInstall.Name = "buttonRescanInstall";
-            this.buttonRescanInstall.Size = new System.Drawing.Size(214, 42);
+            this.buttonRescanInstall.Size = new System.Drawing.Size(209, 39);
             this.buttonRescanInstall.TabIndex = 1;
             this.buttonRescanInstall.Text = "Re-Scan Installations";
             this.tip.SetToolTip(this.buttonRescanInstall, "Scan through the mod install folder and check the files against the mod cache.");
@@ -291,10 +288,10 @@
             this.buttonDeleteNotFound.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonDeleteNotFound.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDeleteNotFound.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.4F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDeleteNotFound.Location = new System.Drawing.Point(216, 0);
+            this.buttonDeleteNotFound.Location = new System.Drawing.Point(211, 0);
             this.buttonDeleteNotFound.Margin = new System.Windows.Forms.Padding(1, 0, 1, 0);
             this.buttonDeleteNotFound.Name = "buttonDeleteNotFound";
-            this.buttonDeleteNotFound.Size = new System.Drawing.Size(213, 42);
+            this.buttonDeleteNotFound.Size = new System.Drawing.Size(208, 39);
             this.buttonDeleteNotFound.TabIndex = 2;
             this.buttonDeleteNotFound.Text = "Remove Missing Archives";
             this.tip.SetToolTip(this.buttonDeleteNotFound, "Scan through the mod install folder and check the files against the mod cache.");
@@ -309,7 +306,7 @@
             this.buttonRescanCache.Location = new System.Drawing.Point(0, 0);
             this.buttonRescanCache.Margin = new System.Windows.Forms.Padding(0, 0, 1, 0);
             this.buttonRescanCache.Name = "buttonRescanCache";
-            this.buttonRescanCache.Size = new System.Drawing.Size(214, 42);
+            this.buttonRescanCache.Size = new System.Drawing.Size(209, 39);
             this.buttonRescanCache.TabIndex = 0;
             this.buttonRescanCache.Text = "Re-Scan Cache";
             this.tip.SetToolTip(this.buttonRescanCache, "Scan through the mod cache folders for new mods you\'ve added.");
@@ -331,8 +328,8 @@
             // splitTreeAndInfo.Panel2
             // 
             this.splitTreeAndInfo.Panel2.Controls.Add(this.splitInfos);
-            this.splitTreeAndInfo.Size = new System.Drawing.Size(821, 698);
-            this.splitTreeAndInfo.SplitterDistance = 446;
+            this.splitTreeAndInfo.Size = new System.Drawing.Size(804, 644);
+            this.splitTreeAndInfo.SplitterDistance = 436;
             this.splitTreeAndInfo.TabIndex = 0;
             // 
             // treeViewFiles
@@ -343,10 +340,10 @@
             this.treeViewFiles.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.treeViewFiles.FullRowSelect = true;
             this.treeViewFiles.HideSelection = false;
-            this.treeViewFiles.Location = new System.Drawing.Point(0, 21);
+            this.treeViewFiles.Location = new System.Drawing.Point(0, 20);
             this.treeViewFiles.Name = "treeViewFiles";
             this.treeViewFiles.ShowNodeToolTips = true;
-            this.treeViewFiles.Size = new System.Drawing.Size(446, 635);
+            this.treeViewFiles.Size = new System.Drawing.Size(436, 585);
             this.treeViewFiles.TabIndex = 0;
             this.treeViewFiles.AfterCheck += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFiles_AfterCheck);
             this.treeViewFiles.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeViewFiles_AfterSelect);
@@ -359,12 +356,12 @@
             this.tableLayoutPanel2.Controls.Add(this.buttonCheckAll, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.buttonUncheckAll, 0, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 656);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 605);
             this.tableLayoutPanel2.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(446, 42);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(436, 39);
             this.tableLayoutPanel2.TabIndex = 2;
             // 
             // buttonCheckAll
@@ -372,10 +369,10 @@
             this.buttonCheckAll.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonCheckAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonCheckAll.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonCheckAll.Location = new System.Drawing.Point(223, 0);
+            this.buttonCheckAll.Location = new System.Drawing.Point(218, 0);
             this.buttonCheckAll.Margin = new System.Windows.Forms.Padding(0);
             this.buttonCheckAll.Name = "buttonCheckAll";
-            this.buttonCheckAll.Size = new System.Drawing.Size(223, 42);
+            this.buttonCheckAll.Size = new System.Drawing.Size(218, 39);
             this.buttonCheckAll.TabIndex = 3;
             this.buttonCheckAll.Text = "Check All Files";
             this.buttonCheckAll.UseVisualStyleBackColor = true;
@@ -389,7 +386,7 @@
             this.buttonUncheckAll.Location = new System.Drawing.Point(0, 0);
             this.buttonUncheckAll.Margin = new System.Windows.Forms.Padding(0);
             this.buttonUncheckAll.Name = "buttonUncheckAll";
-            this.buttonUncheckAll.Size = new System.Drawing.Size(223, 42);
+            this.buttonUncheckAll.Size = new System.Drawing.Size(218, 39);
             this.buttonUncheckAll.TabIndex = 2;
             this.buttonUncheckAll.Text = "Uncheck All Files";
             this.buttonUncheckAll.UseVisualStyleBackColor = true;
@@ -402,7 +399,7 @@
             this.labelSelectedMod.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSelectedMod.Location = new System.Drawing.Point(0, 0);
             this.labelSelectedMod.Name = "labelSelectedMod";
-            this.labelSelectedMod.Size = new System.Drawing.Size(446, 21);
+            this.labelSelectedMod.Size = new System.Drawing.Size(436, 20);
             this.labelSelectedMod.TabIndex = 1;
             this.labelSelectedMod.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -425,8 +422,8 @@
             this.splitInfos.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(25)))), ((int)(((byte)(27)))));
             this.splitInfos.Panel2.Controls.Add(this.richBoxFile);
             this.splitInfos.Panel2.Controls.Add(this.label4);
-            this.splitInfos.Size = new System.Drawing.Size(371, 698);
-            this.splitInfos.SplitterDistance = 386;
+            this.splitInfos.Size = new System.Drawing.Size(364, 644);
+            this.splitInfos.SplitterDistance = 356;
             this.splitInfos.TabIndex = 0;
             // 
             // richBoxMod
@@ -439,11 +436,11 @@
             this.richBoxMod.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richBoxMod.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.richBoxMod.HideSelection = false;
-            this.richBoxMod.Location = new System.Drawing.Point(0, 24);
-            this.richBoxMod.Margin = new System.Windows.Forms.Padding(20);
+            this.richBoxMod.Location = new System.Drawing.Point(0, 22);
+            this.richBoxMod.Margin = new System.Windows.Forms.Padding(20, 18, 20, 18);
             this.richBoxMod.Name = "richBoxMod";
             this.richBoxMod.ReadOnly = true;
-            this.richBoxMod.Size = new System.Drawing.Size(371, 321);
+            this.richBoxMod.Size = new System.Drawing.Size(364, 296);
             this.richBoxMod.TabIndex = 1;
             this.richBoxMod.Text = "";
             this.richBoxMod.WordWrap = false;
@@ -455,7 +452,7 @@
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(0, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(371, 24);
+            this.label3.Size = new System.Drawing.Size(364, 22);
             this.label3.TabIndex = 0;
             this.label3.Text = "Mod Archive Info:";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -468,11 +465,11 @@
             this.tableLayoutPanel1.Controls.Add(this.buttonInstallSelected, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.buttonUninstallSelected, 0, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 345);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 318);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(371, 41);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(364, 38);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // buttonInstallSelected
@@ -480,9 +477,9 @@
             this.buttonInstallSelected.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonInstallSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonInstallSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonInstallSelected.Location = new System.Drawing.Point(188, 3);
+            this.buttonInstallSelected.Location = new System.Drawing.Point(185, 3);
             this.buttonInstallSelected.Name = "buttonInstallSelected";
-            this.buttonInstallSelected.Size = new System.Drawing.Size(180, 35);
+            this.buttonInstallSelected.Size = new System.Drawing.Size(176, 32);
             this.buttonInstallSelected.TabIndex = 2;
             this.buttonInstallSelected.Text = "Install Selected Files";
             this.buttonInstallSelected.UseVisualStyleBackColor = true;
@@ -497,7 +494,7 @@
             this.buttonUninstallSelected.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonUninstallSelected.Location = new System.Drawing.Point(3, 3);
             this.buttonUninstallSelected.Name = "buttonUninstallSelected";
-            this.buttonUninstallSelected.Size = new System.Drawing.Size(179, 35);
+            this.buttonUninstallSelected.Size = new System.Drawing.Size(176, 32);
             this.buttonUninstallSelected.TabIndex = 1;
             this.buttonUninstallSelected.Text = "Uninstall Selected Files";
             this.buttonUninstallSelected.UseVisualStyleBackColor = true;
@@ -513,11 +510,11 @@
             this.richBoxFile.Font = new System.Drawing.Font("Century Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.richBoxFile.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.richBoxFile.HideSelection = false;
-            this.richBoxFile.Location = new System.Drawing.Point(0, 24);
-            this.richBoxFile.Margin = new System.Windows.Forms.Padding(20);
+            this.richBoxFile.Location = new System.Drawing.Point(0, 22);
+            this.richBoxFile.Margin = new System.Windows.Forms.Padding(20, 18, 20, 18);
             this.richBoxFile.Name = "richBoxFile";
             this.richBoxFile.ReadOnly = true;
-            this.richBoxFile.Size = new System.Drawing.Size(371, 284);
+            this.richBoxFile.Size = new System.Drawing.Size(364, 262);
             this.richBoxFile.TabIndex = 2;
             this.richBoxFile.Text = "";
             this.richBoxFile.WordWrap = false;
@@ -529,7 +526,7 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 13F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(0, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(371, 24);
+            this.label4.Size = new System.Drawing.Size(364, 22);
             this.label4.TabIndex = 1;
             this.label4.Text = "Archive File Info:";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -540,9 +537,9 @@
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 33);
+            this.panel1.Location = new System.Drawing.Point(3, 31);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1470, 26);
+            this.panel1.Size = new System.Drawing.Size(1438, 24);
             this.panel1.TabIndex = 0;
             // 
             // textBoxGameDir
@@ -562,7 +559,7 @@
             this.panel2.ForeColor = System.Drawing.Color.Tomato;
             this.panel2.Location = new System.Drawing.Point(111, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(26, 26);
+            this.panel2.Size = new System.Drawing.Size(26, 24);
             this.panel2.TabIndex = 1;
             // 
             // labelGameDirExists
@@ -572,7 +569,7 @@
             this.labelGameDirExists.Location = new System.Drawing.Point(0, 0);
             this.labelGameDirExists.Margin = new System.Windows.Forms.Padding(3, 0, 5, 0);
             this.labelGameDirExists.Name = "labelGameDirExists";
-            this.labelGameDirExists.Size = new System.Drawing.Size(24, 24);
+            this.labelGameDirExists.Size = new System.Drawing.Size(24, 22);
             this.labelGameDirExists.TabIndex = 0;
             this.labelGameDirExists.Text = "X";
             this.labelGameDirExists.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -595,9 +592,9 @@
             this.panel3.Controls.Add(this.textBoxModFolder);
             this.panel3.Controls.Add(this.label1);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(3, 59);
+            this.panel3.Location = new System.Drawing.Point(3, 55);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1470, 26);
+            this.panel3.Size = new System.Drawing.Size(1438, 24);
             this.panel3.TabIndex = 1;
             // 
             // buttonLoadLoadout
@@ -607,10 +604,10 @@
             this.buttonLoadLoadout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Tomato;
             this.buttonLoadLoadout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.buttonLoadLoadout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLoadLoadout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLoadLoadout.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLoadLoadout.Location = new System.Drawing.Point(588, 0);
             this.buttonLoadLoadout.Name = "buttonLoadLoadout";
-            this.buttonLoadLoadout.Size = new System.Drawing.Size(126, 25);
+            this.buttonLoadLoadout.Size = new System.Drawing.Size(126, 23);
             this.buttonLoadLoadout.TabIndex = 6;
             this.buttonLoadLoadout.Text = "Load Loadout";
             this.tip.SetToolTip(this.buttonLoadLoadout, "This simply loads the state of your mods from a previously saved loadout file.\r\nI" +
@@ -626,10 +623,10 @@
             this.buttonSaveLoadout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Tomato;
             this.buttonSaveLoadout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.buttonSaveLoadout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSaveLoadout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSaveLoadout.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSaveLoadout.Location = new System.Drawing.Point(457, 0);
             this.buttonSaveLoadout.Name = "buttonSaveLoadout";
-            this.buttonSaveLoadout.Size = new System.Drawing.Size(126, 25);
+            this.buttonSaveLoadout.Size = new System.Drawing.Size(126, 23);
             this.buttonSaveLoadout.TabIndex = 5;
             this.buttonSaveLoadout.Text = "Save Loadout";
             this.tip.SetToolTip(this.buttonSaveLoadout, resources.GetString("buttonSaveLoadout.ToolTip"));
@@ -696,7 +693,7 @@
             this.topPanel.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.topPanel.Location = new System.Drawing.Point(3, 3);
             this.topPanel.Name = "topPanel";
-            this.topPanel.Size = new System.Drawing.Size(1470, 30);
+            this.topPanel.Size = new System.Drawing.Size(1438, 28);
             this.topPanel.TabIndex = 0;
             // 
             // button2
@@ -704,9 +701,9 @@
             this.button2.Dock = System.Windows.Forms.DockStyle.Right;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(1378, 0);
+            this.button2.Location = new System.Drawing.Point(1346, 0);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(30, 28);
+            this.button2.Size = new System.Drawing.Size(30, 26);
             this.button2.TabIndex = 3;
             this.button2.Text = "-";
             this.button2.UseVisualStyleBackColor = true;
@@ -717,9 +714,9 @@
             this.button1.Dock = System.Windows.Forms.DockStyle.Right;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(1408, 0);
+            this.button1.Location = new System.Drawing.Point(1376, 0);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(30, 28);
+            this.button1.Size = new System.Drawing.Size(30, 26);
             this.button1.TabIndex = 2;
             this.button1.Text = "🗖";
             this.button1.UseVisualStyleBackColor = true;
@@ -732,9 +729,9 @@
             this.buttonClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.buttonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonClose.Location = new System.Drawing.Point(1438, 0);
+            this.buttonClose.Location = new System.Drawing.Point(1406, 0);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(30, 28);
+            this.buttonClose.Size = new System.Drawing.Size(30, 26);
             this.buttonClose.TabIndex = 1;
             this.buttonClose.Text = "X";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -750,7 +747,7 @@
             this.linkCredits.Location = new System.Drawing.Point(282, 0);
             this.linkCredits.Margin = new System.Windows.Forms.Padding(0);
             this.linkCredits.Name = "linkCredits";
-            this.linkCredits.Size = new System.Drawing.Size(105, 28);
+            this.linkCredits.Size = new System.Drawing.Size(105, 26);
             this.linkCredits.TabIndex = 5;
             this.linkCredits.TabStop = true;
             this.linkCredits.Text = "and Company";
@@ -765,7 +762,7 @@
             this.linkNewUpdate.DisabledLinkColor = System.Drawing.Color.PaleTurquoise;
             this.linkNewUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkNewUpdate.LinkColor = System.Drawing.Color.SandyBrown;
-            this.linkNewUpdate.Location = new System.Drawing.Point(393, 5);
+            this.linkNewUpdate.Location = new System.Drawing.Point(400, 5);
             this.linkNewUpdate.Margin = new System.Windows.Forms.Padding(5);
             this.linkNewUpdate.Name = "linkNewUpdate";
             this.linkNewUpdate.Size = new System.Drawing.Size(153, 18);
@@ -792,10 +789,10 @@
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(15)))), ((int)(((byte)(17)))));
-            this.ClientSize = new System.Drawing.Size(1476, 786);
+            this.ClientSize = new System.Drawing.Size(1444, 726);
             this.Controls.Add(this.splitListAndRest);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);

@@ -91,17 +91,18 @@ public class ArchiveFile {
     }
 
     public void SetInfo(RichTextBox textBox, TreeNode node) {
+        Language Language = new Language();
         textBox.Clear();
 
-        textBox.AppendText("Path: "); textBox.AppendText(path, node.ForeColor, true);
-        textBox.AppendText("Status: " + node.ToolTipText, Color.WhiteSmoke, true);
-        textBox.AppendText("Size: "); textBox.AppendText(sizeSuffixed, Color.AliceBlue, true);
+        textBox.AppendText(Language.GetLanguageText("Path") + ": "); textBox.AppendText(path, node.ForeColor, true);
+        textBox.AppendText(Language.GetLanguageText("Status") + ": " + node.ToolTipText, Color.WhiteSmoke, true);
+        textBox.AppendText(Language.GetLanguageText("Size") + ": "); textBox.AppendText(sizeSuffixed, Color.AliceBlue, true);
 
         if (!isDir) {
             textBox.AppendText("CRC: "); textBox.AppendText(crc.ToString("X"), Color.Cyan, true);
 
             if (installedNotMatching) {
-                textBox.AppendText("Installed CRC: "); textBox.AppendText(installedCRC.ToString("X"), node.ForeColor, true);
+                textBox.AppendText(Language.GetLanguageText("Installed") + " CRC: "); textBox.AppendText(installedCRC.ToString("X"), node.ForeColor, true);
             }
 
         }
@@ -110,7 +111,7 @@ public class ArchiveFile {
         var actMods = FindActualCrcMod();
         if (actMods != null && actMods.Count() > 0) {
             string plural = actMods.Count() > 1 ? "s" : "";
-            textBox.AppendText($"Mod{plural} that this file is from:", Color.WhiteSmoke, true);
+            textBox.AppendText($"Mod{plural} " + Language.GetLanguageText("that this file is from:"), Color.WhiteSmoke, true);
             foreach (var mod in actMods) {
                 textBox.AppendText("    " + mod.shortPath, Color.Coral, true);
             }
@@ -119,7 +120,7 @@ public class ArchiveFile {
 
         var sameMods = FindModsWithSameFile().Distinct();
         if (sameMods.Count() > 0) {
-            textBox.AppendText("Mods that also change this file: \n");
+            textBox.AppendText(Language.GetLanguageText("that this file is from:") + " \n");
 
             foreach (var mod in sameMods) {
                 textBox.AppendText("    " + mod.shortPath, Color.Orange, true);

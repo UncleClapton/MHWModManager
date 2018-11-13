@@ -8,7 +8,6 @@ using System.Drawing;
 
 [Serializable]
 public class ModInfo {
-
     public string modPath;
     public string modName;
     public string category;
@@ -64,17 +63,18 @@ public class ModInfo {
 
     public string intalledText {
         get {
+            Language Language = new Language();
             string textValue = "";
             if (installed) {
-                textValue = "Installed";
+                textValue = Language.GetLanguageText("Installed");
             } else if (partiallyInstalled) {
-                textValue = archiveFiles.Any(x => x.installedNotMatching) ? "Conflicting" : "Partial";
+                textValue = archiveFiles.Any(x => x.installedNotMatching) ? Language.GetLanguageText("Conflicting") : Language.GetLanguageText("Partial");
             } else {
-                textValue = "Not Installed";
+                textValue = Language.GetLanguageText("Not Installed");
             }
 
             if (!archiveExists)
-                textValue = "No Archive - " + textValue;
+                textValue = Language.GetLanguageText("No Archive - ") + textValue;
 
             return textValue;
         }
@@ -93,15 +93,16 @@ public class ModInfo {
     }
 
     public void SetInfo(RichTextBox textBox) {
+        Language Language = new Language();
         textBox.Clear();
-        textBox.AppendText("Path: "); textBox.AppendText(shortPath, archiveExists ? Color.LawnGreen : Color.Tomato, true);
+        textBox.AppendText(Language.GetLanguageText("Path") + ": "); textBox.AppendText(shortPath, archiveExists ? Color.LawnGreen : Color.Tomato, true);
 
-        textBox.AppendText("Size: "); textBox.AppendText(sizeSuffixed, Color.Teal, true);
+        textBox.AppendText(Language.GetLanguageText("Size") + ": "); textBox.AppendText(sizeSuffixed, Color.Teal, true);
 
 
         var sameMods = FindModsThatChangeSameFiles();
         if (sameMods.Count() > 0) {
-            textBox.AppendText("Mods that change files also included in this archive: \n");
+            textBox.AppendText(Language.GetLanguageText("Mods that change files also included in this archive:") + " \n");
 
             foreach (var mod in sameMods) {
                 textBox.AppendText(mod.shortPath, Color.Orange, true);
