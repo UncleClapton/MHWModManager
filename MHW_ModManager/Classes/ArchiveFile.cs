@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -11,6 +10,7 @@ using System.Windows.Forms;
 [Serializable]
 public class ArchiveFile {
     static ModsData modsData => MainForm.instance.modsData;
+
     public string path;
     public uint crc;
     public bool isDir;
@@ -91,18 +91,18 @@ public class ArchiveFile {
     }
 
     public void SetInfo(RichTextBox textBox, TreeNode node) {
-        ComponentResourceManager resources = new ComponentResourceManager(typeof(MainForm));
+        Language Language = new Language();
         textBox.Clear();
 
-        textBox.AppendText(resources.GetString("FileInformation.Path")); textBox.AppendText(path, node.ForeColor, true);
-        textBox.AppendText(resources.GetString("FileInformation.Status") + node.ToolTipText, Color.WhiteSmoke, true);
-        textBox.AppendText(resources.GetString("FileInformation.Size"));textBox.AppendText(sizeSuffixed, Color.AliceBlue, true);
+        textBox.AppendText(Language.GetLanguageText("Path") + ": "); textBox.AppendText(path, node.ForeColor, true);
+        textBox.AppendText(Language.GetLanguageText("Status") + ": " + node.ToolTipText, Color.WhiteSmoke, true);
+        textBox.AppendText(Language.GetLanguageText("Size") + ": "); textBox.AppendText(sizeSuffixed, Color.AliceBlue, true);
 
         if (!isDir) {
-            textBox.AppendText(resources.GetString("FileInformation.CRC")); textBox.AppendText(crc.ToString("X"), Color.Cyan, true);
+            textBox.AppendText("CRC: "); textBox.AppendText(crc.ToString("X"), Color.Cyan, true);
 
             if (installedNotMatching) {
-                textBox.AppendText(resources.GetString("FileInformation.InstalledCRC")); textBox.AppendText(installedCRC.ToString("X"), node.ForeColor, true);
+                textBox.AppendText(Language.GetLanguageText("Installed") + " CRC: "); textBox.AppendText(installedCRC.ToString("X"), node.ForeColor, true);
             }
 
         }
@@ -111,7 +111,7 @@ public class ArchiveFile {
         var actMods = FindActualCrcMod();
         if (actMods != null && actMods.Count() > 0) {
             string plural = actMods.Count() > 1 ? "s" : "";
-            textBox.AppendText($"Mod{plural} " + resources.GetString("FileCheck.From"), Color.WhiteSmoke, true);
+            textBox.AppendText($"Mod{plural} " + Language.GetLanguageText("that this file is from:"), Color.WhiteSmoke, true);
             foreach (var mod in actMods) {
                 textBox.AppendText("    " + mod.shortPath, Color.Coral, true);
             }
@@ -120,7 +120,7 @@ public class ArchiveFile {
 
         var sameMods = FindModsWithSameFile().Distinct();
         if (sameMods.Count() > 0) {
-            textBox.AppendText(resources.GetString("FileCheck.Change"));
+            textBox.AppendText(Language.GetLanguageText("that this file is from:") + " \n");
 
             foreach (var mod in sameMods) {
                 textBox.AppendText("    " + mod.shortPath, Color.Orange, true);

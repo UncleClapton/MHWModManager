@@ -5,11 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
-using System.ComponentModel;
 
 [Serializable]
 public class ModInfo {
-
     public string modPath;
     public string modName;
     public string category;
@@ -65,18 +63,18 @@ public class ModInfo {
 
     public string intalledText {
         get {
-            ComponentResourceManager resources = new ComponentResourceManager(typeof(MainForm));
+            Language Language = new Language();
             string textValue = "";
             if (installed) {
-                textValue = resources.GetString("IntalledText.Installed");
+                textValue = Language.GetLanguageText("Installed");
             } else if (partiallyInstalled) {
-                textValue = archiveFiles.Any(x => x.installedNotMatching) ? resources.GetString("IntalledText.Conflicting") : resources.GetString("IntalledText.Partial");
+                textValue = archiveFiles.Any(x => x.installedNotMatching) ? Language.GetLanguageText("Conflicting") : Language.GetLanguageText("Partial");
             } else {
-                textValue = resources.GetString("IntalledText.NoArchive");
+                textValue = Language.GetLanguageText("Not Installed");
             }
 
             if (!archiveExists)
-                textValue = resources.GetString("IntalledText.NoInstalled") + textValue;
+                textValue = Language.GetLanguageText("No Archive - ") + textValue;
 
             return textValue;
         }
@@ -95,16 +93,16 @@ public class ModInfo {
     }
 
     public void SetInfo(RichTextBox textBox) {
-        ComponentResourceManager resources = new ComponentResourceManager(typeof(MainForm));
+        Language Language = new Language();
         textBox.Clear();
-        textBox.AppendText(resources.GetString("FileInformation.Path")); textBox.AppendText(shortPath, archiveExists ? Color.LawnGreen : Color.Tomato, true);
+        textBox.AppendText(Language.GetLanguageText("Path") + ": "); textBox.AppendText(shortPath, archiveExists ? Color.LawnGreen : Color.Tomato, true);
 
-        textBox.AppendText(resources.GetString("FileInformation.Size")); textBox.AppendText(sizeSuffixed, Color.Teal, true);
+        textBox.AppendText(Language.GetLanguageText("Size") + ": "); textBox.AppendText(sizeSuffixed, Color.Teal, true);
 
 
         var sameMods = FindModsThatChangeSameFiles();
         if (sameMods.Count() > 0) {
-            textBox.AppendText(resources.GetString("FileCheck.Existence"));
+            textBox.AppendText(Language.GetLanguageText("Mods that change files also included in this archive:") + " \n");
 
             foreach (var mod in sameMods) {
                 textBox.AppendText(mod.shortPath, Color.Orange, true);
