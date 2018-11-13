@@ -16,7 +16,6 @@ public class ArchiveFile {
     public bool isDir;
     public string directory;
     public ArchiveFile parent;
-    public Language Language = new Language();
     public List<ArchiveFile> children = new List<ArchiveFile>();
     public ModInfo modBelong;
     public TreeNode belongingNode;
@@ -92,6 +91,7 @@ public class ArchiveFile {
     }
 
     public void SetInfo(RichTextBox textBox, TreeNode node) {
+        Language Language = new Language();
         textBox.Clear();
 
         textBox.AppendText(Language.GetLanguageText("Path") + ": "); textBox.AppendText(path, node.ForeColor, true);

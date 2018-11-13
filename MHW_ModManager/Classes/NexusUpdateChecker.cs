@@ -37,10 +37,10 @@ public class NexusUpdateChecker {
             }
             MainForm.instance.linkNewUpdate.Visible = true;
 
-            Console.WriteLine(Language.GetLanguageText("OnlineVersion:") + versionNum);
-            Console.WriteLine(Language.GetLanguageText("LocalVersion:") + MainForm.programVersion);
+            Console.WriteLine("OnlineVersion:" + versionNum);
+            Console.WriteLine("LocalVersion:" + MainForm.programVersion);
         } catch (Exception ex){
-            Console.WriteLine(Language.GetLanguageText("UpdateCheckFailed") + "\n" + ex.Message);
+            Console.WriteLine("UpdateCheckFailed\n" + ex.Message);
             MainForm.instance.linkNewUpdate.Text = Language.GetLanguageText("Check For Updates");
             MainForm.instance.linkNewUpdate.LinkColor = System.Drawing.Color.PaleTurquoise;
             MainForm.instance.linkNewUpdate.Visible = true;

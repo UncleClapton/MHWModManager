@@ -8,7 +8,6 @@ using System.Drawing;
 
 [Serializable]
 public class ModInfo {
-    public Language Language = new Language();
     public string modPath;
     public string modName;
     public string category;
@@ -64,11 +63,12 @@ public class ModInfo {
 
     public string intalledText {
         get {
+            Language Language = new Language();
             string textValue = "";
             if (installed) {
                 textValue = Language.GetLanguageText("Installed");
             } else if (partiallyInstalled) {
-                textValue = archiveFiles.Any(x => x.installedNotMatching) ? "Conflicting" : "Partial";
+                textValue = archiveFiles.Any(x => x.installedNotMatching) ? Language.GetLanguageText("Conflicting") : Language.GetLanguageText("Partial");
             } else {
                 textValue = Language.GetLanguageText("Not Installed");
             }
@@ -93,6 +93,7 @@ public class ModInfo {
     }
 
     public void SetInfo(RichTextBox textBox) {
+        Language Language = new Language();
         textBox.Clear();
         textBox.AppendText(Language.GetLanguageText("Path") + ": "); textBox.AppendText(shortPath, archiveExists ? Color.LawnGreen : Color.Tomato, true);
 

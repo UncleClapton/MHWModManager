@@ -604,7 +604,7 @@
             this.buttonLoadLoadout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Tomato;
             this.buttonLoadLoadout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.buttonLoadLoadout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonLoadLoadout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonLoadLoadout.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLoadLoadout.Location = new System.Drawing.Point(588, 0);
             this.buttonLoadLoadout.Name = "buttonLoadLoadout";
             this.buttonLoadLoadout.Size = new System.Drawing.Size(126, 23);
@@ -623,7 +623,7 @@
             this.buttonSaveLoadout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Tomato;
             this.buttonSaveLoadout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Maroon;
             this.buttonSaveLoadout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonSaveLoadout.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSaveLoadout.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSaveLoadout.Location = new System.Drawing.Point(457, 0);
             this.buttonSaveLoadout.Name = "buttonSaveLoadout";
             this.buttonSaveLoadout.Size = new System.Drawing.Size(126, 23);
@@ -762,7 +762,7 @@
             this.linkNewUpdate.DisabledLinkColor = System.Drawing.Color.PaleTurquoise;
             this.linkNewUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkNewUpdate.LinkColor = System.Drawing.Color.SandyBrown;
-            this.linkNewUpdate.Location = new System.Drawing.Point(393, 5);
+            this.linkNewUpdate.Location = new System.Drawing.Point(400, 5);
             this.linkNewUpdate.Margin = new System.Windows.Forms.Padding(5);
             this.linkNewUpdate.Name = "linkNewUpdate";
             this.linkNewUpdate.Size = new System.Drawing.Size(153, 18);

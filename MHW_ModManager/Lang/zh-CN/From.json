@@ -5,6 +5,7 @@
   "olvColumnSize.Text": "文件大小",
   "olvColumnDate.Text": "创建时间",
   "olvColumnCat.Text": "类别",
+  "olvModList.EmptyListMsg": "将Mod安装文件拖动到这里或将它们放置在Mod安装包存放文件夹中，然后点击重新扫描安装包将Mod添加进来。",
   "label3.Text": "Mod安装包信息:",
   "label4.Text": "Mod内置文件信息:",
   "deleteModArchiveToolStripMenuItem.Text": "删除Mod安装文件并卸载Mod",

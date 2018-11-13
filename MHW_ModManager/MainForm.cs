@@ -20,6 +20,7 @@ public partial class MainForm : Form {
 
     public static MainForm instance;
     public ModsData modsData;
+    public Language Language = new Language();
 
     public MainForm() {
         instance = this;
@@ -38,7 +39,7 @@ public partial class MainForm : Form {
 
         olvColumnSize.AspectToStringConverter = (object sizeFloat) => ModInfo.SizeSuffixer((float)sizeFloat);
 
-        labelTitle.Text = $"MHW Mod Managaer V{programVersion} - By: BoltMan";
+        labelTitle.Text = Language.GetLanguageText("MHW Mod Managaer") +$" V{programVersion} - By: BoltMan";
 
         NexusUpdateChecker.CheckForNewVersion();
     }
@@ -152,41 +153,43 @@ public partial class MainForm : Form {
     }
 
     static void CheckTreeFilesInstalled(IEnumerable<ArchiveFile> topFiles) {
+        Language Language = new Language();
         foreach (var file in topFiles) {
             file.belongingNode.Checked = file.GetInstalledStatus();
             if (!file.isDir && !file.parent && !instance.modsData.useTopLevelFiles) {
                 file.belongingNode.ForeColor = Color.DarkGray;
-                file.belongingNode.ToolTipText = "Ignored because it is a top-level file and the \"ignore top-level files\" option is on.";
+                file.belongingNode.ToolTipText = Language.GetLanguageText("Ignored because it is a top-level file and the \"ignore top-level files\" option is on.");
 
             } else if (file.installed) {
                 if (file.installedNotMatching) {
                     file.belongingNode.ForeColor = Color.Orange;
-                    file.belongingNode.ToolTipText = "The file exists in the folder but it is not from this mod. (Checksums don't match)\n" +
-                        "   Select this file to see what mod the file actually belongs to.";
+                    file.belongingNode.ToolTipText = Language.GetLanguageText("The file exists in the folder but it is not from this mod. (Checksums don't match)") + "\n" +
+                        Language.GetLanguageText("Select this file to see what mod the file actually belongs to.");
                 } else {
                     file.belongingNode.ForeColor = Color.LawnGreen;
-                    file.belongingNode.ToolTipText = "This file is installed in the folder and the checksum matches this mod.";
+                    file.belongingNode.ToolTipText = Language.GetLanguageText("This file is installed in the folder and the checksum matches this mod.");
                 }
             } else {
                 file.belongingNode.ForeColor = Color.LightYellow;
-                file.belongingNode.ToolTipText = "This file isn't found at all in the folder.";
+                file.belongingNode.ToolTipText = Language.GetLanguageText("This file isn't found at all in the folder.");
             }
             CheckTreeFilesInstalled(file.children);
         }
     }
 
     static void CheckTreeFilesNotInstalled(IEnumerable<ArchiveFile> topFiles) {
+        Language Language = new Language();
         foreach (var file in topFiles) {
             file.belongingNode.Checked = instance.modsData.useTopLevelFiles || !file.isTopFile;
             if (!file.isDir && File.Exists(file.installedPath)) {
-                file.belongingNode.ToolTipText = "File exists from another mod.";
+                file.belongingNode.ToolTipText = Language.GetLanguageText("File exists from another mod.");
                 file.belongingNode.ForeColor = Color.Coral;
             } else {
                 if (file.belongingNode.Checked) {
-                    file.belongingNode.ToolTipText = "File does not exist in the mod folder and is ready to be installed.";
+                    file.belongingNode.ToolTipText = Language.GetLanguageText("File does not exist in the mod folder and is ready to be installed.");
                     file.belongingNode.ForeColor = Color.WhiteSmoke;
                 } else {
-                    file.belongingNode.ToolTipText = "File is ignored because it is a top-level file and the \"ignore top-level files\" option is on.";
+                    file.belongingNode.ToolTipText = Language.GetLanguageText("File is ignored because it is a top-level file and the \"ignore top-level files\" option is on.");
                     file.belongingNode.ForeColor = Color.DarkGray;
                 }
             }
@@ -275,7 +278,7 @@ public partial class MainForm : Form {
     }
 
     private void buttonRescanInstall_Click(object sender, EventArgs e) {
-        buttonRescanInstall.Text = "Scanning...";
+        buttonRescanInstall.Text = Language.GetLanguageText("Scanning...");
         buttonRescanInstall.Refresh();
 
         ModCache.ReCheckMods(modsData.modInfos);
@@ -284,7 +287,7 @@ public partial class MainForm : Form {
             mod.CheckIfInstalled();
         }
 
-        buttonRescanInstall.Text = "Re-Scan Installations";
+        buttonRescanInstall.Text = Language.GetLanguageText("Re-Scan Installations");
 
         SaveData();
 
@@ -489,16 +492,17 @@ public partial class MainForm : Form {
         var credBox = InputBoxForm.OKBOX("Credits");
         credBox.TitleLabel.ForeColor = Color.White;
 
-        credBox.richTextBox1.Height += 20;
-        credBox.Height += 25;
+        credBox.richTextBox1.Height += 50;
+        credBox.Height += 65;
 
         credBox.richTextBox1.Font = new Font("Microsoft Sans Serif", 12);
         credBox.panelBG.BorderStyle = BorderStyle.Fixed3D;
 
-        credBox.richTextBox1.AppendText("BoltMan: Project Creator", Color.MediumSlateBlue, true);
-        credBox.richTextBox1.AppendText("UncleClapton: Repo Manager/Contributor", Color.RoyalBlue, true);
+        credBox.richTextBox1.AppendText("BoltMan: " + Language.GetLanguageText("Project Creator"), Color.MediumSlateBlue, true);
+        credBox.richTextBox1.AppendText("UncleClapton: " + Language.GetLanguageText("Repo Manager/Contributor"), Color.RoyalBlue, true);
+        credBox.richTextBox1.AppendText("HalcyonAlcedo: " + Language.GetLanguageText("Chinese translator"), Color.RoyalBlue, true);
         credBox.richTextBox1.AppendText("", Color.RoyalBlue, true);
-        credBox.richTextBox1.AppendText("You can contribute @ https://github.com/UncleClapton/MHWModManager", Color.Orange, false);
+        credBox.richTextBox1.AppendText(Language.GetLanguageText("You can contribute") + " @ https://github.com/UncleClapton/MHWModManager", Color.Orange, false);
 
         credBox.richTextBox1.CenterText();
 

@@ -1,6 +1,5 @@
 {
   "When enabled, files at the root of the archive will be ignored. This is good for ignoring files like Readme's that arent in any folders.": "勾选后，存档根目录中的文件将被忽略。这对于排除掉Mod说明文件是很有用的。",
-  "This file isn't found at all in the folder.": "被忽略，因为它是根目录文件，而“忽略根目录文件”选项是打开的。",
   "Path": "文件路径：",
   "Size": "大小",
   "Status": "状态",
@@ -24,7 +23,22 @@
   "OnlineVersion": "最新版本",
   "LocalVersion": "本地版本",
   "UpdateCheckFailed": "更新检查失败",
-  "Check For Updates": "检查更新"
-
-
+  "Check For Updates": "检查更新",
+  "Conflicting": "存在冲突",
+  "Partial": "部分存在",
+  "MHW Mod Managaer": "怪物猎人世界Mod管理器",
+  "Ignored because it is a top-level file and the \"ignore top-level files\" option is on.": "忽略文件，因为它是根目录文件文件，而“忽略根目录文件文件”选项是打开的。",
+  "The file exists in the folder but it is not from this mod. (Checksums don't match)": "文件已存在，但并非来自这个Mod。（CRC不匹配）",
+  "Select this file to see what mod the file actually belongs to.": "查找此文件以查看文件实际上属于哪个Mod。",
+  "This file is installed in the folder and the checksum matches this mod.": "文件已存在，与目前Mod文件一致。",
+  "This file isn't found at all in the folder.": "这个文件不存在于文件夹中。",
+  "File exists from another mod.": "文件存在于另一个Mod中。",
+  "File does not exist in the mod folder and is ready to be installed.": "文件不存在于文件中，已准备好安装文件。",
+  "File is ignored because it is a top-level file and the \"ignore top-level files\" option is on.": "文件被忽略，因为它是根目录文件文件，而“忽略根目录文件文件”选项是打开的。",
+  "Re-Scan Installations": "重新扫描已安装文件",
+  "Scanning...": "扫描中...",
+  "Project Creator": "项目创建者",
+  "Repo Manager/Contributor": "项目管理者/贡献者",
+  "Chinese translator": "项目中文翻译",
+  "You can contribute": "你可以提供贡献"
 }
