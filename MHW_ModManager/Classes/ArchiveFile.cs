@@ -32,8 +32,12 @@ public class ArchiveFile {
     public bool installedNotMatching => installed && installedCRC != crc;
 
     public string GetDirectPath() {
+        if(path.ToLower().FixSlashes() == modsData.modDir.ToLower().FixSlashes())
+            return "";
+        
         int idxModFolder = path.ToLower().IndexOf(modsData.modDir.ToLower());
-        return idxModFolder < 0 ? path : path.Substring(idxModFolder + modsData.modDir.Length + 1);
+        int subIdx = idxModFolder + modsData.modDir.Length + 1;
+        return idxModFolder < 0 || subIdx > path.Length ? path : path.Substring(subIdx);
     }
     public string installedPath => $"{modBelong.gameModDir}\\{GetDirectPath()}";
 
