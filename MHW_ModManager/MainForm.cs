@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 public partial class MainForm : Form {
 
 
-    public const float programVersion = 1.4f;
+    public const float programVersion = 1.41f;
 
     public static MainForm instance;
     public ModsData modsData;

@@ -95,6 +95,7 @@ public class ArchiveFile {
 
         textBox.AppendText("Path: "); textBox.AppendText(path, node.ForeColor, true);
         textBox.AppendText("Status: " + node.ToolTipText, Color.WhiteSmoke, true);
+        textBox.AppendText("Install Location: "); textBox.AppendText(installedPath, Color.LightYellow, true);
         textBox.AppendText("Size: "); textBox.AppendText(sizeSuffixed, Color.AliceBlue, true);
 
         if (!isDir) {
