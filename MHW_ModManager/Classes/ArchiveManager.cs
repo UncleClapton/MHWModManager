@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using SevenZip;
+using SharpCompress.Readers;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,22 +12,36 @@ public static class ArchiveManager {
 
     public static ArchiveFile[] GetArchiveFiles(ModInfo modInfo) {
         try {
-            List<ArchiveFile> fileList = null;
+            List<ArchiveFile> fileList = new List<ArchiveFile>();
             using (Stream stream = File.OpenRead(modInfo.modPath)) {
 
                 modInfo.fileSize = stream.Length / 1048576f;
 
-                using (var extractor = new SevenZipExtractor(stream)) {
-                    var files = extractor.ArchiveFileData;
-                    fileList = new List<ArchiveFile>(files.Count);
-                    foreach (var file in files) {
-                        fileList.Add(new ArchiveFile() {
-                            path = file.FileName.FixSlashes(),
-                            crc = file.Crc,
-                            isDir = file.IsDirectory,
-                            size = file.Size / 1048576f,
-                            directory = file.IsDirectory ? file.FileName.FixSlashes() : ""
-                        });
+
+                if (modInfo.sevZip) {
+                    using (var extractor = new SevenZipExtractor(stream)) {
+                        var files = extractor.ArchiveFileData;
+                        foreach (var file in files) {
+                            fileList.Add(new ArchiveFile() {
+                                path = file.FileName.FixSlashes(),
+                                crc = file.Crc,
+                                isDir = file.IsDirectory,
+                                size = file.Size / 1048576f,
+                                directory = file.IsDirectory ? file.FileName.FixSlashes() : ""
+                            });
+                        }
+                    }
+                } else {
+                    using (var reader = ReaderFactory.Open(stream)) {
+                        while (reader.MoveToNextEntry()) {
+                            fileList.Add(new ArchiveFile() {
+                                path = reader.Entry.Key.FixSlashes(),
+                                crc = (uint)reader.Entry.Crc,
+                                isDir = reader.Entry.IsDirectory,
+                                size = reader.Entry.Size / 1048576f,
+                                directory = reader.Entry.IsDirectory ? reader.Entry.Key.FixSlashes() : ""
+                            });
+                        }
                     }
                 }
             }
@@ -91,36 +106,76 @@ public static class ArchiveManager {
             List<ModInfo> modsToRefresh = new List<ModInfo>() { };
 
             using (Stream stream = File.OpenRead(mod.modPath)) {
-                using (var extractor = new SevenZipExtractor(stream)) {
 
-                    int fileCount = extractor.ArchiveFileData.Count(x => !x.IsDirectory);
 
-                    foreach (var fileData in extractor.ArchiveFileData) {
-                        count++;
-                        if (fileData.IsDirectory) continue;
-                        fileCounter++;
+                if (mod.sevZip) {
+                    using (var extractor = new SevenZipExtractor(stream)) {
 
-                        ArchiveFile matchFile = mod.archiveFiles.FirstOrDefault(x => x.crc == fileData.Crc && x.path == fileData.FileName.FixSlashes());
+                        int fileCount = extractor.ArchiveFileData.Count(x => !x.IsDirectory);
 
-                        if (matchFile && matchFile.belongingNode.Checked) {
+                        foreach (var fileData in extractor.ArchiveFileData) {
+                            count++;
+                            if (fileData.IsDirectory) continue;
+                            fileCounter++;
 
-                            if (File.Exists(matchFile.installedPath)) {
-                                if (!matchFile.installedNotMatching)
-                                    continue;
+                            ArchiveFile matchFile = mod.archiveFiles.FirstOrDefault(x => x.crc == fileData.Crc && x.path == fileData.FileName.FixSlashes());
 
-                                CheckWarnDialogue(ref skipWarnings, ref overwrite, fileCounter, fileCount, matchFile);
+                            if (matchFile && matchFile.belongingNode.Checked) {
 
-                                if (!overwrite)
-                                    continue;
+                                if (File.Exists(matchFile.installedPath)) {
+                                    if (!matchFile.installedNotMatching)
+                                        continue;
 
-                                File.Delete(matchFile.installedPath);
+                                    CheckWarnDialogue(ref skipWarnings, ref overwrite, fileCounter, fileCount, matchFile);
+
+                                    if (!overwrite)
+                                        continue;
+
+                                    File.Delete(matchFile.installedPath);
+                                }
+
+                                modsToRefresh.AddRange(matchFile.FindModsWithSameFile());
+
+                                Directory.CreateDirectory(Path.GetDirectoryName(matchFile.installedPath));
+                                using (var fileStream = File.OpenWrite(matchFile.installedPath)) {
+                                    extractor.ExtractFile(count, fileStream);
+                                }
                             }
+                        }
 
-                            modsToRefresh.AddRange(matchFile.FindModsWithSameFile());
+                        //extractor.ExtractFiles(mod.gameModDir, indiciesToExtract.ToArray());
+                    }
+                } else {
+                    using (var reader = ReaderFactory.Open(stream)) {
 
-                            Directory.CreateDirectory(Path.GetDirectoryName(matchFile.installedPath));
-                            using (var fileStream = File.OpenWrite(matchFile.installedPath)) {
-                                extractor.ExtractFile(count, fileStream);
+                        int fileCount = mod.archiveFiles.Count(x => !x.isDir);
+
+                        while (reader.MoveToNextEntry()) {
+                            count++;
+                            if (reader.Entry.IsDirectory) continue;
+                            fileCounter++;
+
+                            uint fileCRC = (uint)reader.Entry.Crc;
+                            ArchiveFile matchFile = mod.archiveFiles.FirstOrDefault(x => x.crc == fileCRC && x.path == reader.Entry.Key.FixSlashes());
+
+                            if (matchFile && matchFile.belongingNode.Checked) {
+
+                                if (File.Exists(matchFile.installedPath)) {
+                                    if (!matchFile.installedNotMatching)
+                                        continue;
+
+                                    CheckWarnDialogue(ref skipWarnings, ref overwrite, fileCounter, fileCount, matchFile);
+
+                                    if (!overwrite)
+                                        continue;
+                                }
+
+                                modsToRefresh.AddRange(matchFile.FindModsWithSameFile());
+
+                                Directory.CreateDirectory(Path.GetDirectoryName(matchFile.installedPath));
+                                reader.WriteEntryToFile(matchFile.installedPath, new SharpCompress.Common.ExtractionOptions() {
+                                    PreserveFileTime = true, PreserveAttributes = false, ExtractFullPath = true, Overwrite = true
+                                });
                             }
                         }
                     }
@@ -163,8 +218,7 @@ public static class ArchiveManager {
                 foreach (var rMod in actMods) {
                     warnDialogue.richTextBox1.AppendText(rMod.shortPath, Color.Orange, true);
                 }
-            }
-            else {
+            } else {
                 warnDialogue.richTextBox1.AppendText($"It is unknown what mod this file belongs to.", Color.Coral, true);
             }
 
