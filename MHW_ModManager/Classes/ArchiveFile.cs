@@ -24,7 +24,7 @@ public class ArchiveFile {
     public string sizeSuffixed => ModInfo.SizeSuffixer(size);
 
 
-    public bool isTopFile => !isDir && !parent;
+    public bool isTopFile => !isDir && (!parent || (parent.isTopFolder && parent.children.Any(x => x.isDir)));
     public bool isTopFolder => isDir && !parent;
 
     public bool installed = false;

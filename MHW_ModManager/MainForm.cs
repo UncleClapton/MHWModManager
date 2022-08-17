@@ -107,7 +107,7 @@ public partial class MainForm : Form {
         ModInfo selMod = GetSelectedMod();
         if (!selMod || e.Node == null) return;
 
-        ArchiveFile selFile = selMod.archiveFiles.First(x => x.belongingNode == e.Node);
+        ArchiveFile selFile = selMod.archiveFiles.FirstOrDefault(x => x.belongingNode == e.Node);
         if (!selFile) return;
 
         selFile.SetInfo(richBoxFile, e.Node);
@@ -149,7 +149,7 @@ public partial class MainForm : Form {
     static void CheckTreeFilesInstalled(IEnumerable<ArchiveFile> topFiles) {
         foreach (var file in topFiles) {
             file.belongingNode.Checked = file.GetInstalledStatus();
-            if (!file.isDir && !file.parent && !instance.modsData.useTopLevelFiles) {
+            if (!file.isDir && file.isTopFile && !instance.modsData.useTopLevelFiles) {
                 file.belongingNode.ForeColor = Color.DarkGray;
                 file.belongingNode.ToolTipText = "Ignored because it is a top-level file and the \"ignore top-level files\" option is on.";
 
@@ -424,19 +424,24 @@ public partial class MainForm : Form {
 
     private void buttonUncheckAll_Click(object sender, EventArgs e) {
         foreach (TreeNode node in treeViewFiles.Nodes) {
-            CheckAll(node, false);
+            CheckAll(false);
         }
     }
     private void buttonCheckAll_Click(object sender, EventArgs e) {
         foreach (TreeNode node in treeViewFiles.Nodes) {
-            CheckAll(node, true);
+            CheckAll(true);
         }
     }
 
-    void CheckAll(TreeNode pNode, bool state) {
-        pNode.Checked = state;
-        foreach (TreeNode node in pNode.Nodes) {
-            CheckAll(node, state);
+    void CheckAll(bool state) {
+
+        var mod = GetSelectedMod();
+        if (!mod) return;
+
+        foreach (var file in mod.archiveFiles) {
+            if (!file.isTopFile || modsData.useTopLevelFiles) {
+                file.belongingNode.Checked = state;
+            }
         }
     }
 

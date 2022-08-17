@@ -107,7 +107,6 @@ public class ModInfo {
                 textBox.AppendText(mod.shortPath, Color.Orange, true);
             }
         }
-
     }
 
 
